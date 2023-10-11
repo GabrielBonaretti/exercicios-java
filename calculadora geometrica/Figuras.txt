@@ -1,0 +1,3 @@
+Planas:Quadrado, Circulo, Triangulo, Retangulo, Hexagono Regular.
+Espaciais:Cubo, Paralelepido, Piramide de base quadrada, Esfera, Cilindro, Cone.
+
