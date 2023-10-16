@@ -1,6 +1,7 @@
 import FlatFigures.*;
 import SpecialFigures.*;
 
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
@@ -9,16 +10,19 @@ public class Menu {
     public void printMenu() {
         switch (menu) {
             case "0":
+                System.out.println("\n-------------------------\n");
                 System.out.println("Calculadora geométrica:");
-                System.out.println("-------------------------\n");
+                System.out.println("\n-------------------------\n");
                 System.out.println("1 - Figuras planas");
                 System.out.println("2 - Figuras especiais");
+                System.out.println("3 - Sair");
 
                 choiceMenuOption();
                 break;
             case "01":
+                System.out.println("\n-------------------------\n");
                 System.out.println("Figuras planas:");
-                System.out.println("-------------------------\n");
+                System.out.println("\n-------------------------\n");
                 System.out.println("1 - Círculo");
                 System.out.println("2 - Retângulo");
                 System.out.println("3 - Hexagono regular");
@@ -36,6 +40,7 @@ public class Menu {
 
                 System.out.println("CÍRCULO");
                 System.out.printf("Área: %.2f. Perimetro: %.2f \n", circleArea, circlePerimeter);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "012":
                 Rectangle rectangle = new Rectangle();
@@ -45,6 +50,7 @@ public class Menu {
 
                 System.out.println("RETÂNGULO");
                 System.out.printf("Área: %.2f. Perimetro: %.2f \n", rectangleArea, rectanglePerimeter);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "013":
                 RegularHexagon regularHexagon = new RegularHexagon();
@@ -54,6 +60,7 @@ public class Menu {
 
                 System.out.println("HEXÁGONO REGULAR");
                 System.out.printf("Área: %.2f. Perimetro: %.2f \n", regularHexagonArea, regularHexagonPerimeter);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "014":
                 Square square = new Square();
@@ -63,6 +70,7 @@ public class Menu {
 
                 System.out.println("QUADRADO");
                 System.out.printf("Área: %.2f. Perimetro: %.2f \n", squareArea, squarePerimeter);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "015":
                 Triangle triangle = new Triangle();
@@ -72,13 +80,15 @@ public class Menu {
 
                 System.out.println("TRIÂNGULO");
                 System.out.printf("Área: %.2f. Perimetro: %.2f \n", triangleArea, trianglePerimeter);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "016", "027":
                 menu = "0";
                 break;
             case "02":
+                System.out.println("\n-------------------------\n");
                 System.out.println("Figuras Especiais:");
-                System.out.println("-------------------------\n");
+                System.out.println("\n-------------------------\n");
                 System.out.println("1 - Cone");
                 System.out.println("2 - Cubo");
                 System.out.println("3 - Cilindro");
@@ -86,6 +96,8 @@ public class Menu {
                 System.out.println("5 - Esfera");
                 System.out.println("6 - Piramede");
                 System.out.println("7 - Voltar");
+
+                choiceMenuOption();
                 break;
             case "021":
                 Cone cone = new Cone();
@@ -94,6 +106,7 @@ public class Menu {
 
                 System.out.println("CONE");
                 System.out.printf("Volume: %.2f \n", coneVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "022":
                 Cube cube = new Cube();
@@ -102,6 +115,7 @@ public class Menu {
 
                 System.out.println("CUBO");
                 System.out.printf("Volume: %.2f \n", cubeVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "023":
                 Cylinder cylinder = new Cylinder();
@@ -110,6 +124,7 @@ public class Menu {
 
                 System.out.println("CILINDRO");
                 System.out.printf("Volume: %.2f \n", cylinderVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "024":
                 Parallelepiped parallelepiped = new Parallelepiped();
@@ -118,6 +133,7 @@ public class Menu {
 
                 System.out.println("PARALELEPIPEDO");
                 System.out.printf("Volume: %.2f \n", parallelepipedVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "025":
                 Sphere sphere = new Sphere();
@@ -126,6 +142,7 @@ public class Menu {
 
                 System.out.println("ESFERA");
                 System.out.printf("Volume: %.2f \n", sphereVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             case "026":
                 SquareBasePyramid pyramid = new SquareBasePyramid();
@@ -134,20 +151,35 @@ public class Menu {
 
                 System.out.println("PIRÂMIDE");
                 System.out.printf("Volume: %.2f \n", pyramidVolume);
+                menu = menu.substring(0, menu.length() - 1);
                 break;
             default:
-                System.out.println("opcao errada burro");
+                System.out.println("Escolha uma opção válida!");
                 menu = menu.substring(0, menu.length() - 1);
                 break;
         }
     }
 
     public void choiceMenuOption() {
-
-        System.out.println("Escolha a opção no menu: ");
-        int choice = sc.nextInt();
-        menu = menu + choice;
+        while (true) {
+            try {
+                System.out.print("Escolha a opção no menu: ");
+                int choice = sc.nextInt();
+                menu = menu + choice;
+                break;
+            } catch (Exception e) {
+                System.out.println("Apenas números");
+                sc.next();
+            }
+        }
     }
 
+    public String isFinished() {
+        if (Objects.equals(menu, "03")) {
+            return "N";
+        }
+
+        return "S";
+    }
 
 }

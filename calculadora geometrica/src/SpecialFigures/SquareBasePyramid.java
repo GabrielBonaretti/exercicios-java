@@ -23,6 +23,7 @@ public class SquareBasePyramid {
                 break;
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
+                sc.next();
             }
         }
     }

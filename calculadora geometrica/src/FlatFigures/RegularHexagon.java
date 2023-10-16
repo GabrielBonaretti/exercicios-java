@@ -18,10 +18,10 @@ public class RegularHexagon {
             try {
                 System.out.print("Digite um lado do hexagono: ");
                 this.side = sc.nextDouble();
-
                 break;
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
+                sc.next();
             }
         }
     }

@@ -14,18 +14,19 @@ public class Parallelepiped {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite a largura do paralelepipedo: ");
+                System.out.print("Digite a largura do paralelepipedo: ");
                 this.width = sc.nextDouble();
 
-                System.out.println("Digite o comprimento do paralelepipedo: ");
+                System.out.print("Digite o comprimento do paralelepipedo: ");
                 this.length = sc.nextDouble();
 
-                System.out.println("Digite a altura do paralelepipedo: ");
+                System.out.print("Digite a altura do paralelepipedo: ");
                 this.heigth = sc.nextDouble();
 
                 break;
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
+                sc.next();
             }
         }
     }

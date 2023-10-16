@@ -12,12 +12,13 @@ public class Cube {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite o lado do cubo: ");
+                System.out.print("Digite o lado do cubo: ");
                 this.side = sc.nextDouble();
 
                 break;
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
+                sc.next();
             }
         }
     }

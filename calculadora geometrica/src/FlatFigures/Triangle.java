@@ -22,6 +22,7 @@ public class Triangle {
                 break;
             } catch (Exception e) {
                 System.out.println("Digite um valor válido!");
+                sc.next();
             }
         }
     }
