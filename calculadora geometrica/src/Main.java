@@ -4,9 +4,12 @@ public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         String continueGame = "S";
-
+        Menu menu = new Menu();
         while (continueGame.equals("S")) {
-            continueGame = continueInput(sc);
+            System.out.print("\033[H\033[2J");
+            System.out.flush();
+            menu.printMenu();
+//            continueGame = continueInput(sc);
         }
     }
 
@@ -21,43 +24,4 @@ public class Main {
         }
     }
 
-    public static int menu(Scanner sc, int typeMenu) {
-        int selection;
-        switch (typeMenu) {
-            case 1:
-                System.out.println("Calculadora geométrica:");
-                System.out.println("-------------------------\n");
-                System.out.println("1 - Figuras planas");
-                System.out.println("2 - Figuras especiais");
-                System.out.println("3 - Fechar");
-
-                selection = sc.nextInt();
-                return selection;
-            case 2:
-                System.out.println("Figuras planas:");
-                System.out.println("-------------------------\n");
-                System.out.println("1 - Circulo");
-                System.out.println("2 - Retangulo");
-                System.out.println("3 - Hexagono regular");
-                System.out.println("4 - Quadrado");
-                System.out.println("5 - Triangulo");
-                System.out.println("6 - Voltar");
-
-                selection = sc.nextInt();
-                return selection;
-            case 3:
-                System.out.println("Figuras Especiais:");
-                System.out.println("-------------------------\n");
-                System.out.println("1 - Esfera");
-                System.out.println("2 - Cubo");
-                System.out.println("3 - Cilindro");
-                System.out.println("4 - Paralelepipedo");
-                System.out.println("5 - Cone");
-                System.out.println("6 - Piramede");
-                selection = sc.nextInt();
-                return selection;
-        }
-
-        return 0;
-    }
 }
