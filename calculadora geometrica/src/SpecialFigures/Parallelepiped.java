@@ -1,17 +1,32 @@
 package SpecialFigures;
 
+import java.util.Scanner;
+
 public class Parallelepiped {
     private double width;
     private double length;
     private double heigth;
 
-    public Parallelepiped(double width, double length, double heigth) {
-        this.width = width;
-        this.length = length;
-        this.heigth = heigth;
-    }
-
     public double volume() {
         return width * length * heigth;
+    }
+
+    public void setAtributes(Scanner sc) {
+        while(true) {
+            try {
+                System.out.println("Digite a largura do paralelepipedo: ");
+                this.width = sc.nextDouble();
+
+                System.out.println("Digite o comprimento do paralelepipedo: ");
+                this.length = sc.nextDouble();
+
+                System.out.println("Digite a altura do paralelepipedo: ");
+                this.heigth = sc.nextDouble();
+
+                break;
+            } catch (Exception e) {
+                System.out.println("Digite um valor válido!");
+            }
+        }
     }
 }

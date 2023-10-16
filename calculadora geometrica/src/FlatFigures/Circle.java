@@ -17,7 +17,7 @@ public class Circle {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite o raio do circulo: ");
+                System.out.print("Digite o raio do circulo: ");
                 this.radius = sc.nextDouble();
                 break;
             } catch (Exception e) {

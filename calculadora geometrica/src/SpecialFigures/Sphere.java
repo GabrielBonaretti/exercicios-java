@@ -5,9 +5,6 @@ import java.util.Scanner;
 public class Sphere {
     private double radius;
     private static double pi = Math.PI;
-    public Sphere(double radius){
-        this.radius = radius;
-    }
 
     public double volume() {
         return ((double) 4/3) * pi * Math.pow(radius, 3);

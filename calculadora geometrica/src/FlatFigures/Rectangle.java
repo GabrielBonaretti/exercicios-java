@@ -17,10 +17,10 @@ public class Rectangle {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite a largura do retangulo: ");
+                System.out.print("Digite a largura do retangulo: ");
                 this.width = sc.nextDouble();
 
-                System.out.println("Digite o comprimento do retangulo: ");
+                System.out.print("Digite o comprimento do retangulo: ");
                 this.length = sc.nextDouble();
                 break;
             } catch (Exception e) {

@@ -2,7 +2,7 @@ package FlatFigures;
 
 import java.util.Scanner;
 
-public class regularHexagon {
+public class RegularHexagon {
     private double side;
 
     public double perimeter() {
@@ -16,7 +16,7 @@ public class regularHexagon {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite um lado do hexagono: ");
+                System.out.print("Digite um lado do hexagono: ");
                 this.side = sc.nextDouble();
 
                 break;

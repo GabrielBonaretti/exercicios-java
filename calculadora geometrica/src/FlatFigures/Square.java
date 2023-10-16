@@ -16,7 +16,7 @@ public class Square {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite o lado do quadrado: ");
+                System.out.print("Digite o lado do quadrado: ");
                 this.side = sc.nextDouble();
 
                 break;

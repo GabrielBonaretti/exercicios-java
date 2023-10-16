@@ -16,7 +16,7 @@ public class Triangle {
     public void setAtributes(Scanner sc) {
         while(true) {
             try {
-                System.out.println("Digite o lado do triângulo: ");
+                System.out.print("Digite o lado do triângulo: ");
                 this.side = sc.nextDouble();
 
                 break;
