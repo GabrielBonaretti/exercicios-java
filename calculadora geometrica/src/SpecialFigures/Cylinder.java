@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class Cylinder {
+public class Cylinder implements InterfaceSpecialFigures {
     private double radiusBase;
     private double height;
     private static double pi = Math.PI;

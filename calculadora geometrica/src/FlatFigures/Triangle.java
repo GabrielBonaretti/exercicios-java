@@ -1,8 +1,9 @@
 package FlatFigures;
 
+import Interfaces.InterfaceFlatFigures;
 import java.util.Scanner;
 
-public class Triangle {
+public class Triangle implements InterfaceFlatFigures {
     private double side;
 
     public double perimeter() {

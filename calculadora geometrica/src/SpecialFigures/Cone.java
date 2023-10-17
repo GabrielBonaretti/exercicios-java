@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class Cone {
+public class Cone implements InterfaceSpecialFigures {
     private double radiusBase;
     private double height;
     private static double pi = Math.PI;

@@ -1,8 +1,9 @@
 package FlatFigures;
 
+import Interfaces.InterfaceFlatFigures;
 import java.util.Scanner;
 
-public class Square {
+public class Square implements InterfaceFlatFigures {
     private double side;
 
     public double perimeter() {

@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class SquareBasePyramid {
+public class SquareBasePyramid implements InterfaceSpecialFigures {
     private double sideBase;
     private double height;
 

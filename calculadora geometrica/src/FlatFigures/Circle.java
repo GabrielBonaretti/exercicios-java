@@ -1,8 +1,9 @@
 package FlatFigures;
 
+import Interfaces.InterfaceFlatFigures;
 import java.util.Scanner;
 
-public class Circle {
+public class Circle implements InterfaceFlatFigures {
     private double radius;
     private static double pi = Math.PI;
 

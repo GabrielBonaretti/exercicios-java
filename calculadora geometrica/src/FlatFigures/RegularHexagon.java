@@ -1,8 +1,9 @@
 package FlatFigures;
 
+import Interfaces.InterfaceFlatFigures;
 import java.util.Scanner;
 
-public class RegularHexagon {
+public class RegularHexagon implements InterfaceFlatFigures {
     private double side;
 
     public double perimeter() {

@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class Sphere {
+public class Sphere implements InterfaceSpecialFigures {
     private double radius;
     private static double pi = Math.PI;
 

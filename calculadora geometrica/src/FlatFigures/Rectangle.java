@@ -1,8 +1,9 @@
 package FlatFigures;
 
+import Interfaces.InterfaceFlatFigures;
 import java.util.Scanner;
 
-public class Rectangle {
+public class Rectangle implements InterfaceFlatFigures {
     private double width;
     private double length;
 

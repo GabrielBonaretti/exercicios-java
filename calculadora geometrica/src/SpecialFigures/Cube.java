@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class Cube {
+public class Cube implements InterfaceSpecialFigures {
     private double side;
 
     public double volume() {

@@ -1,15 +1,21 @@
 import FlatFigures.*;
+import Interfaces.InterfaceFlatFigures;
+import Interfaces.InterfaceSpecialFigures;
 import SpecialFigures.*;
 
 import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {
+    // Initialize the menu choice as "0".
     public String menu = "0";
     public Scanner sc = new Scanner(System.in);
+
+    // Method to print the menu options based on the current menu choice.
     public void printMenu() {
         switch (menu) {
             case "0":
+                // Display the main menu for selecting geometric figures.
                 System.out.println("\n-------------------------\n");
                 System.out.println("Calculadora geométrica:");
                 System.out.println("\n-------------------------\n");
@@ -20,6 +26,7 @@ public class Menu {
                 choiceMenuOption();
                 break;
             case "01":
+                // Menu options for flat figures.
                 System.out.println("\n-------------------------\n");
                 System.out.println("Figuras planas:");
                 System.out.println("\n-------------------------\n");
@@ -33,56 +40,37 @@ public class Menu {
                 choiceMenuOption();
                 break;
             case "011":
+                // Create an instance of Circle and calculate/display its properties.
                 Circle circle = new Circle();
-                circle.setAtributes(sc);
-                double circleArea = circle.area();
-                double circlePerimeter =circle.perimeter();
-
-                System.out.println("CÍRCULO");
-                System.out.printf("Área: %.2f. Perimetro: %.2f \n", circleArea, circlePerimeter);
+                calculateDisplayFlat(circle);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "012":
+                // Create an instance of Rectangle and calculate/display its properties.
                 Rectangle rectangle = new Rectangle();
-                rectangle.setAtributes(sc);
-                double rectangleArea = rectangle.area();
-                double rectanglePerimeter =rectangle.perimeter();
-
-                System.out.println("RETÂNGULO");
-                System.out.printf("Área: %.2f. Perimetro: %.2f \n", rectangleArea, rectanglePerimeter);
+                calculateDisplayFlat(rectangle);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "013":
+                // Create an instance of RegularHexagon and calculate/display its properties.
                 RegularHexagon regularHexagon = new RegularHexagon();
-                regularHexagon.setAtributes(sc);
-                double regularHexagonArea = regularHexagon.area();
-                double regularHexagonPerimeter =regularHexagon.perimeter();
-
-                System.out.println("HEXÁGONO REGULAR");
-                System.out.printf("Área: %.2f. Perimetro: %.2f \n", regularHexagonArea, regularHexagonPerimeter);
+                calculateDisplayFlat(regularHexagon);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "014":
+                // Create an instance of Square and calculate/display its properties.
                 Square square = new Square();
-                square.setAtributes(sc);
-                double squareArea = square.area();
-                double squarePerimeter =square.perimeter();
-
-                System.out.println("QUADRADO");
-                System.out.printf("Área: %.2f. Perimetro: %.2f \n", squareArea, squarePerimeter);
+                calculateDisplayFlat(square);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "015":
+                // Create an instance of Triangle and calculate/display its properties.
                 Triangle triangle = new Triangle();
-                triangle.setAtributes(sc);
-                double triangleArea = triangle.area();
-                double trianglePerimeter =triangle.perimeter();
-
-                System.out.println("TRIÂNGULO");
-                System.out.printf("Área: %.2f. Perimetro: %.2f \n", triangleArea, trianglePerimeter);
+                calculateDisplayFlat(triangle);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "016", "027":
+                // Return to the main menu.
                 menu = "0";
                 break;
             case "02":
@@ -101,56 +89,32 @@ public class Menu {
                 break;
             case "021":
                 Cone cone = new Cone();
-                cone.setAtributes(sc);
-                double coneVolume = cone.volume();
-
-                System.out.println("CONE");
-                System.out.printf("Volume: %.2f \n", coneVolume);
+                calculateDisplaySpecial(cone);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "022":
                 Cube cube = new Cube();
-                cube.setAtributes(sc);
-                double cubeVolume = cube.volume();
-
-                System.out.println("CUBO");
-                System.out.printf("Volume: %.2f \n", cubeVolume);
+                calculateDisplaySpecial(cube);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "023":
                 Cylinder cylinder = new Cylinder();
-                cylinder.setAtributes(sc);
-                double cylinderVolume = cylinder.volume();
-
-                System.out.println("CILINDRO");
-                System.out.printf("Volume: %.2f \n", cylinderVolume);
+                calculateDisplaySpecial(cylinder);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "024":
                 Parallelepiped parallelepiped = new Parallelepiped();
-                parallelepiped.setAtributes(sc);
-                double parallelepipedVolume = parallelepiped.volume();
-
-                System.out.println("PARALELEPIPEDO");
-                System.out.printf("Volume: %.2f \n", parallelepipedVolume);
+                calculateDisplaySpecial(parallelepiped);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "025":
                 Sphere sphere = new Sphere();
-                sphere.setAtributes(sc);
-                double sphereVolume = sphere.volume();
-
-                System.out.println("ESFERA");
-                System.out.printf("Volume: %.2f \n", sphereVolume);
+                calculateDisplaySpecial(sphere);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "026":
                 SquareBasePyramid pyramid = new SquareBasePyramid();
-                pyramid.setAtributes(sc);
-                double pyramidVolume = pyramid.volume();
-
-                System.out.println("PIRÂMIDE");
-                System.out.printf("Volume: %.2f \n", pyramidVolume);
+                calculateDisplaySpecial(pyramid);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             default:
@@ -182,4 +146,18 @@ public class Menu {
         return "S";
     }
 
+    public void calculateDisplayFlat(InterfaceFlatFigures flatFigure) {
+        flatFigure.setAtributes(sc);
+        double flatFigureArea = flatFigure.area();
+        double flatFigurePerimeter =flatFigure.perimeter();
+        System.out.printf("Área: %.2f. Perimetro: %.2f \n", flatFigureArea, flatFigurePerimeter);
+        sc.next();
+    }
+
+    public void calculateDisplaySpecial(InterfaceSpecialFigures specialFigure) {
+        specialFigure.setAtributes(sc);
+        double specialFigureVolume = specialFigure.volume();
+        System.out.printf("Volume: %.2f \n", specialFigureVolume);
+        sc.next();
+    }
 }

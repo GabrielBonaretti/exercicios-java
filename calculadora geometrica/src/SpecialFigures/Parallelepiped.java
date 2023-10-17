@@ -1,8 +1,9 @@
 package SpecialFigures;
 
+import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
-public class Parallelepiped {
+public class Parallelepiped implements InterfaceSpecialFigures {
     private double width;
     private double length;
     private double heigth;
