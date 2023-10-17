@@ -2,6 +2,7 @@ import java.util.Scanner;
 import java.util.concurrent.ExecutionException;
 
 public class Main {
+    // Função para calcular os últimos dois digitos de um CPF fornecido.
     public static String caculoCpf(String cpfEntrada) {
         StringBuilder cpfEntradaBuilder = new StringBuilder(cpfEntrada);
         for (int i = 0; i < 2; i++) {
@@ -9,24 +10,29 @@ public class Main {
             int count = listaCPF.length + 1;
             int soma = 0;
 
+            // Calcula a soma ponderada dos dígitos do CPF.
             for (String numero : listaCPF) {
                 int numeroInteiro = Integer.parseInt(numero);
                 int multi = numeroInteiro * count;
                 soma = soma + multi;
                 count--;
             }
+
+            // Calcula o primeiro e o segundo dígito verificador (D1 e D2).
             int numeroD1 = 11 - (soma % 11);
 
             if (numeroD1 > 9) {
                 numeroD1 = 0;
             }
 
+            // Adiciona o dígito verificador calculado ao CPF.
             cpfEntradaBuilder.append(numeroD1);
         }
         cpfEntrada = cpfEntradaBuilder.toString();
         return cpfEntrada;
     }
 
+    // Função para formatar uma string de CPF no formato padrão XXX.XXX.XXX-XX.
     public static String arrumarCPF(String cpfEntrada){
         String[] listaCPF = cpfEntrada.split("");
         StringBuilder cpfPadrao = new StringBuilder();
@@ -52,12 +58,16 @@ public class Main {
         return cpfPadrao.toString();
     }
 
+    // Função para verificar a validade de um CPF fornecido.
     public static boolean verificacaoCpf(String cpfEntrada){
         String verificarCpf9 = cpfEntrada.substring(0,9);
         String cpfCorreto = caculoCpf(verificarCpf9);
+
+        // Verifica se os os ultimos dois digitos calculados correspondem ao CPF fornecido.
         return cpfCorreto.equalsIgnoreCase(cpfEntrada);
     }
 
+    // Função para exibir o menu e retornar a escolha do usuário.
     public static int menu(Scanner sc) {
         while (true) {
             try {
@@ -76,6 +86,7 @@ public class Main {
         }
     }
 
+    // Função para receber um input válido do usuario e gerar um CPF.
     public static void gerarCPF(Scanner sc) {
         while(true) {
             try {
@@ -92,6 +103,7 @@ public class Main {
         }
     }
 
+    // Função para receber um input válido do usuario e validar um CPF.
     public static void verificarCPF(Scanner sc) {
         while(true) {
             try {
