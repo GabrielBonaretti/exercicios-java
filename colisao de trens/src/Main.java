@@ -12,18 +12,26 @@ public class Main {
             int velocityA = verifyVelocity(sc, "A");
             int velocityB = verifyVelocity(sc, "B");
 
+            // Calculate the time it takes for the two trains to collide.
             double time = (double) (startingPositionA - startingPositionB) / (velocityB - velocityA);
 
+            // Calculate the positions of the trains at the time of collision.
             double a = startingPositionA + velocityA * time;
             double b = startingPositionB + velocityB * time;
 
-            String timeFormat = transformHoursTime(time);
-            System.out.printf("A colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos, as %s \n", a, time*3600, timeFormat);
+            if (time < 0) {
+                System.out.println("A colisão de trens não acontecerá!");
+            } else {
+                // Format and display the collision time.
+                String timeFormat = transformHoursTime(time);
+                System.out.printf("A colisão de trens acontecerá no KM %.0f e ocorrerá após %.0f segundos, as %s \n", a, time*3600, timeFormat);
+            }
 
             continueGame = continueInput(sc);
         }
     }
 
+    // Converts time in hours to a formatted time string (HH:MM:SS).
     public static String transformHoursTime(double timeHours) {
         double minutesTimeConverted = Math.abs((timeHours - (int)timeHours) * 60);
         double secondsTimeConverted = Math.abs((minutesTimeConverted - (int)minutesTimeConverted) * 60);
@@ -32,6 +40,7 @@ public class Main {
         String minutesString = String.valueOf((int)minutesTimeConverted);
         String secondsString = String.valueOf((int)secondsTimeConverted);
 
+        // Format hours, minutes, and seconds with leading zeros if needed.
         String hoursStringFormat = String.format("%2s", hoursString).replace(' ', '0');
         String minutesStringFormat = String.format("%2s", minutesString).replace(' ', '0');
         String secondsStringFormat = String.format("%2s", secondsString).replace(' ', '0');
@@ -39,6 +48,7 @@ public class Main {
         return String.format("%s:%s:%s", hoursStringFormat, minutesStringFormat, secondsStringFormat);
     }
 
+    // Asks the user if they want to continue and returns the response.
     public static String continueInput(Scanner sc) {
         sc.nextLine();
         while (true) {
@@ -50,6 +60,7 @@ public class Main {
         }
     }
 
+    // Verifies and retrieves the initial position of a train, ensuring it's within a valid range.
     public static int verifyPosition(Scanner sc, String train) {
         while (true) {
             try {
@@ -69,6 +80,7 @@ public class Main {
         }
     }
 
+    // Verifies and retrieves the velocity of a train while ensuring it has the correct sign based on the train type.
     public static int verifyVelocity(Scanner sc, String train) {
         while (true) {
             try {
