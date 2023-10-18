@@ -3,16 +3,19 @@ package SpecialFigures;
 import Interfaces.InterfaceSpecialFigures;
 import java.util.Scanner;
 
+// The Cylinder class implements the InterfaceSpecialFigures interface.
 public class Cylinder implements InterfaceSpecialFigures {
     private double radiusBase;
     private double height;
     private static double pi = Math.PI;
 
+    // This method calculates and returns the volume of the cylinder.
     public double volume() {
         double areaBase = pi * (radiusBase * radiusBase);
         return areaBase * height;
     }
 
+    // This method is used to set the attributes or properties of the cone based on user input provided through the Scanner object.
     public void setAtributes(Scanner sc) {
         while(true) {
             try {

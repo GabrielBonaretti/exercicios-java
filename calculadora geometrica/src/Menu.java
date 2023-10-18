@@ -74,6 +74,7 @@ public class Menu {
                 menu = "0";
                 break;
             case "02":
+                // Display the menu for selecting special figures.
                 System.out.println("\n-------------------------\n");
                 System.out.println("Figuras Especiais:");
                 System.out.println("\n-------------------------\n");
@@ -88,31 +89,37 @@ public class Menu {
                 choiceMenuOption();
                 break;
             case "021":
+                // Calculate and display the volume of a Cone.
                 Cone cone = new Cone();
                 calculateDisplaySpecial(cone);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "022":
+                // Calculate and display the volume of a Cube.
                 Cube cube = new Cube();
                 calculateDisplaySpecial(cube);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "023":
+                // Calculate and display the volume of a Cylinder.
                 Cylinder cylinder = new Cylinder();
                 calculateDisplaySpecial(cylinder);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "024":
+                // Calculate and display the volume of a Parallelepiped.
                 Parallelepiped parallelepiped = new Parallelepiped();
                 calculateDisplaySpecial(parallelepiped);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "025":
+                // Calculate and display the volume of a Sphere.
                 Sphere sphere = new Sphere();
                 calculateDisplaySpecial(sphere);
                 menu = menu.substring(0, menu.length() - 1);
                 break;
             case "026":
+                // Calculate and display the volume of a Pyramid.
                 SquareBasePyramid pyramid = new SquareBasePyramid();
                 calculateDisplaySpecial(pyramid);
                 menu = menu.substring(0, menu.length() - 1);
@@ -124,12 +131,13 @@ public class Menu {
         }
     }
 
+    // Method to handle user menu choices.
     public void choiceMenuOption() {
         while (true) {
             try {
                 System.out.print("Escolha a opção no menu: ");
                 int choice = sc.nextInt();
-                menu = menu + choice;
+                menu = menu + choice; // Update the menu choice.
                 break;
             } catch (Exception e) {
                 System.out.println("Apenas números");
@@ -138,14 +146,16 @@ public class Menu {
         }
     }
 
+    // Method to check if the program should exit.
     public String isFinished() {
         if (Objects.equals(menu, "03")) {
+            // If the user chooses option 3, exit the program.
             return "N";
         }
-
-        return "S";
+        return "S"; // Continue the program.
     }
 
+    // Method to calculate and display properties of flat figures.
     public void calculateDisplayFlat(InterfaceFlatFigures flatFigure) {
         flatFigure.setAtributes(sc);
         double flatFigureArea = flatFigure.area();
@@ -154,6 +164,7 @@ public class Menu {
         sc.next();
     }
 
+    // Method to calculate and display properties of special figures.
     public void calculateDisplaySpecial(InterfaceSpecialFigures specialFigure) {
         specialFigure.setAtributes(sc);
         double specialFigureVolume = specialFigure.volume();
