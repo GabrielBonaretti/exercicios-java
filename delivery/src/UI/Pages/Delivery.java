@@ -1,5 +1,6 @@
 package src.UI.Pages;
 
+import src.UI.Layout.ListarRestaurantes;
 import src.UI.Layout.Sidebar;
 
 import javax.swing.*;
@@ -12,5 +13,6 @@ public class Delivery extends JPanel {
         this.setLayout(null);
 
         this.add(new Sidebar());
+        this.add(new ListarRestaurantes());
     }
 }
