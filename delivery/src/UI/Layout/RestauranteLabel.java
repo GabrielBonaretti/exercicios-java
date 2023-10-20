@@ -6,7 +6,7 @@ import java.awt.*;
 public class RestauranteLabel extends JLabel {
 
     public RestauranteLabel(String restaurantName, String restaurantPosition, int y) {
-        this.setBounds(125, y, 500, 50);
+        this.setBounds(0, y, 500, 50);
         this.setBackground(new Color(180,180,180));
         this.setOpaque(true);
 

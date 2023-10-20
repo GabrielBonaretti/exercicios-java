@@ -7,7 +7,6 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BotaoSideBar extends JButton {
-
     public BotaoSideBar(String text, int y, String textImg) {
         super(text);
         ImageIcon imageButton = new ImageIcon(textImg);

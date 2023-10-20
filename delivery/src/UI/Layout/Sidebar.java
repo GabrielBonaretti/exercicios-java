@@ -1,16 +1,17 @@
 package src.UI.Layout;
 
 import src.UI.Components.BotaoSideBar;
+import src.UI.Pages.Delivery;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Sidebar extends JLabel {
-    public boolean isRestaurante = true;
-    public ArrayList<BotaoSideBar> listaBotoes = new ArrayList<BotaoSideBar>();
+    private boolean isRestaurante = true;
+    private ArrayList<BotaoSideBar> listaBotoes = new ArrayList<BotaoSideBar>();
 
-    public Sidebar() {
+    public Sidebar(Delivery delivey) {
         this.setBounds(0, 0, 250, 800);
         this.setBackground(new Color(200,200,200));
         this.setOpaque(true);
@@ -51,4 +52,5 @@ public class Sidebar extends JLabel {
             botao.setBackground(new Color(200, 200, 200));
         }
     }
+
 }
