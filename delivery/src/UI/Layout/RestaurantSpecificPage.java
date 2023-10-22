@@ -27,7 +27,7 @@ public class RestaurantSpecificPage extends JPanel {
 
         int count = 0;
         for (Lanche lanche: restaurante.listaLanches) {
-            LancheLabel lancheLabel = new LancheLabel(190 + count * 70, lanche, delivery);
+            LancheLabel lancheLabel = new LancheLabel(190 + count * 70, lanche, delivery, restaurante);
             this.add(lancheLabel);
             count++;
         }

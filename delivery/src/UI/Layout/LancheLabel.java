@@ -6,9 +6,10 @@ import src.UI.Pages.Delivery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class LancheLabel extends JLabel {
-    public LancheLabel(int y, Lanche lanche, Delivery delivery) {
+    public LancheLabel(int y, Lanche lanche, Delivery delivery, Restaurante restaurante) {
         this.setBounds(125, y, 500, 50);
         this.setLayout(null);
 
@@ -29,6 +30,13 @@ public class LancheLabel extends JLabel {
         button.setBorder(null);
         button.setFocusable(false);
         button.addActionListener(e -> {
+            if (delivery.pedido.restaurante != null && !Objects.equals(delivery.pedido.restaurante.nome, restaurante.nome)) {
+                delivery.pedido.restaurante = restaurante;
+                delivery.pedido.carrinho.clear();
+                delivery.orderLayout.recreateRequests();
+            } else {
+                delivery.pedido.restaurante = restaurante;
+            }
             delivery.pedido.fazerPedido(lanche);
             delivery.orderLayout.recreateRequests();
         });

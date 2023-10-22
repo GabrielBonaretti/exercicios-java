@@ -35,13 +35,7 @@ public class RestauranteLabel extends JLabel {
         buttonRestaurant.setFocusable(false);
         buttonRestaurant.addActionListener(e -> {
             System.out.println(delivery.pedido.restaurante != null);
-            if (delivery.pedido.restaurante != null && !Objects.equals(delivery.pedido.restaurante.nome, restaurante.nome)) {
-                delivery.pedido.restaurante = restaurante;
-                delivery.pedido.carrinho.clear();
-                delivery.orderLayout.recreateRequests();
-            } else {
-                delivery.pedido.restaurante = restaurante;
-            }
+
 
             if (delivery.restaurantSpecificPage != null) {
                 delivery.remove(delivery.restaurantSpecificPage);
