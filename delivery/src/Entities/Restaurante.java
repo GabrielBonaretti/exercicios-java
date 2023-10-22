@@ -21,15 +21,8 @@ public class Restaurante {
         }
     }
 
-    public void adicionarLanche() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite seu nome: ");
-        String nome = sc.nextLine();
-
-        System.out.println("Digite o preco: ");
-        double preco = sc.nextDouble();
-
-        listaLanches.add(new Lanche(nome, preco));
+    public void adicionarLanche(Lanche lanche) {
+        listaLanches.add(lanche);
     }
     public void removerLanche() {
         Scanner sc = new Scanner(System.in);

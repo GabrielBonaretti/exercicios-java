@@ -16,19 +16,19 @@ public class Sidebar extends JLabel {
         this.setBackground(new Color(200,200,200));
         this.setOpaque(true);
 
-        BotaoSideBar botaoListarRestaurantes = new BotaoSideBar("Listar restaurantes", 0, "src/Resources/lista.png");
+        BotaoSideBar botaoListarRestaurantes = new BotaoSideBar("Listar restaurantes", 0, "src/Resources/lista.png",0);
         botaoListarRestaurantes.setBackground(new Color(170, 170, 170));
-        BotaoSideBar carrinho = new BotaoSideBar("Carrinho", 40, "src/Resources/cart.png");
+        BotaoSideBar carrinho = new BotaoSideBar("Carrinho", 40, "src/Resources/cart.png",1);
         BotaoSideBar botaoSair;
         BotaoSideBar botaoMeuRestaurantes;
 
         if (isRestaurante) {
-            botaoMeuRestaurantes = new BotaoSideBar("Meu restaurante", 80, "src/Resources/loja.png");
-            botaoSair = new BotaoSideBar("Sair", 120, "src/Resources/logout.png");
+            botaoMeuRestaurantes = new BotaoSideBar("Meu restaurante", 80, "src/Resources/loja.png",2);
+            botaoSair = new BotaoSideBar("Sair", 120, "src/Resources/logout.png", 4);
             listaBotoes.add(botaoMeuRestaurantes);
             this.add(botaoMeuRestaurantes);
         } else {
-            botaoSair = new BotaoSideBar("Sair", 80, "src/Resources/logout.png");
+            botaoSair = new BotaoSideBar("Sair", 80, "src/Resources/logout.png",4);
         }
 
         listaBotoes.add(carrinho);
@@ -39,6 +39,27 @@ public class Sidebar extends JLabel {
             botao.addActionListener(e -> {
                 limpandoCor();
                 botao.setBackground(new Color(170, 170, 170));
+
+                switch (botao.buttonChoice) {
+                    case 0:
+                        delivey.listRestaurantLayout.show(true);
+                        delivey.orderLayout.show(false);
+                        delivey.myRestaurantLayout.show(false);
+                        delivey.restaurantSpecificPage.show(false);
+                        break;
+                    case 1:
+                        delivey.listRestaurantLayout.show(false);
+                        delivey.orderLayout.show(true);
+                        delivey.myRestaurantLayout.show(false);
+                        delivey.restaurantSpecificPage.show(false);
+                        break;
+                    case 2:
+                        delivey.listRestaurantLayout.show(false);
+                        delivey.orderLayout.show(false);
+                        delivey.myRestaurantLayout.show(true);
+                        delivey.restaurantSpecificPage.show(false);
+                        break;
+                }
             });
         }
 

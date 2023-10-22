@@ -1,7 +1,9 @@
 package src.UI.Layout;
 
 import src.Entities.Endereco;
+import src.Entities.Lanche;
 import src.Entities.Restaurante;
+import src.UI.Pages.Delivery;
 
 import javax.swing.*;
 import java.awt.*;
@@ -15,32 +17,39 @@ public class ListRestaurantLayout extends JLabel {
     private JButton prev;
     private JButton next;
     private int countPage;
+    public Delivery delivery;
 
-    public ListRestaurantLayout() {
+    public ListRestaurantLayout(Delivery delivery) {
         Endereco endereco1 = new Endereco(4, 2);
-        Restaurante restaurante1 = new Restaurante("a", endereco1);
+        Lanche lanche1 = new Lanche("lache1", 20.1);
+        Lanche lanche2 = new Lanche("lache2", 17.5);
+        Restaurante restaurante1 = new Restaurante("Restaurante1", endereco1);
+        restaurante1.adicionarLanche(lanche1);
+        restaurante1.adicionarLanche(lanche2);
         this.listRestaurants.add(restaurante1);
 
-        Restaurante restaurante2 = new Restaurante("b", endereco1);
+        Restaurante restaurante2 = new Restaurante("Restaurante2", endereco1);
         this.listRestaurants.add(restaurante2);
 
-        Restaurante restaurante3 = new Restaurante("c", endereco1);
+        Restaurante restaurante3 = new Restaurante("Restaurante3", endereco1);
         this.listRestaurants.add(restaurante3);
 
-        Restaurante restaurante4 = new Restaurante("d", endereco1);
+        Restaurante restaurante4 = new Restaurante("Restaurante4", endereco1);
         this.listRestaurants.add(restaurante4);
 
-        Restaurante restaurante5 = new Restaurante("e", endereco1);
+        Restaurante restaurante5 = new Restaurante("Restaurante5", endereco1);
         this.listRestaurants.add(restaurante5);
 
-        Restaurante restaurante6 = new Restaurante("f", endereco1);
+        Restaurante restaurante6 = new Restaurante("Restaurante6", endereco1);
         this.listRestaurants.add(restaurante6);
 
-        Restaurante restaurante7 = new Restaurante("g", endereco1);
+        Restaurante restaurante7 = new Restaurante("Restaurante7", endereco1);
         this.listRestaurants.add(restaurante7);
 
-        Restaurante restaurante8 = new Restaurante("Restaurante4", endereco1);
+        Restaurante restaurante8 = new Restaurante("Restaurante8", endereco1);
         this.listRestaurants.add(restaurante8);
+
+        this.delivery = delivery;
 
         listFilteredRestaurants = (ArrayList<Restaurante>) listRestaurants.stream().collect(Collectors.toList());;
 
@@ -101,8 +110,7 @@ public class ListRestaurantLayout extends JLabel {
         for(int i = 0; i < 6; i++) {
             try {
                 Restaurante restaurante = listFilteredRestaurants.get(i + 6*countPage);
-                String restaurantPosition = restaurante.localizacao.posicaoX+", "+restaurante.localizacao.posicaoY;
-                RestauranteLabel restauranteLabel = new RestauranteLabel(restaurante.nome, restaurantPosition, i*70);
+                RestauranteLabel restauranteLabel = new RestauranteLabel(restaurante, i*70, this.delivery);
                 restaurantsListLabel.add(restauranteLabel);
             } catch (Exception e) {
                 break;

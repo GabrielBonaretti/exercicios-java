@@ -7,8 +7,10 @@ import java.awt.*;
 import java.io.IOException;
 
 public class BotaoSideBar extends JButton {
-    public BotaoSideBar(String text, int y, String textImg) {
+    public int buttonChoice;
+    public BotaoSideBar(String text, int y, String textImg, int buttonChoice) {
         super(text);
+        this.buttonChoice = buttonChoice;
         ImageIcon imageButton = new ImageIcon(textImg);
         imageButton.setImage(imageButton.getImage().getScaledInstance(30,30, Image.SCALE_DEFAULT));
         this.setIcon(imageButton);
