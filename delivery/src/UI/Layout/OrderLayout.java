@@ -26,6 +26,11 @@ public class OrderLayout extends JLabel {
         linha.setBackground(new Color(180,180,180));
         linha.setOpaque(true);
         this.add(linha);
+
+        JLabel noItems = new JLabel("Não há items no carrinho!", SwingConstants.CENTER);
+        noItems.setBounds(275, 365, 200, 50);
+        noItems.setFont(new Font("Arial", Font.BOLD,15));
+        this.add(noItems);
     }
 
     public void recreateRequests() {

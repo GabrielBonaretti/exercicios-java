@@ -25,11 +25,28 @@ public class RestaurantSpecificPage extends JPanel {
         linha.setOpaque(true);
         this.add(linha);
 
+        JPanel panel = new JPanel();
+        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+        panel.setVisible(true);
+
         int count = 0;
         for (Lanche lanche: restaurante.listaLanches) {
-            LancheLabel lancheLabel = new LancheLabel(190 + count * 70, lanche, delivery, restaurante);
-            this.add(lancheLabel);
+            LancheLabel lancheLabel = new LancheLabel(count * 70, lanche, delivery, restaurante);
+            lancheLabel.setVisible(true);
+            panel.add(lancheLabel);
+
+            panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
             count++;
+
         }
+
+        JScrollPane scrollPane = new JScrollPane(panel);
+        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        scrollPane.setVisible(true);
+        scrollPane.setBorder(null);
+        scrollPane.setBounds(125, 190, 500, 500);
+        this.add(scrollPane);
     }
 }

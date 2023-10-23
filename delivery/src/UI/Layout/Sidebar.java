@@ -45,19 +45,25 @@ public class Sidebar extends JLabel {
                         delivey.listRestaurantLayout.show(true);
                         delivey.orderLayout.show(false);
                         delivey.myRestaurantLayout.show(false);
-                        delivey.restaurantSpecificPage.show(false);
+                        if (delivey.restaurantSpecificPage != null) {
+                            delivey.restaurantSpecificPage.show(false);
+                        }
                         break;
                     case 1:
                         delivey.listRestaurantLayout.show(false);
                         delivey.orderLayout.show(true);
                         delivey.myRestaurantLayout.show(false);
-                        delivey.restaurantSpecificPage.show(false);
+                        if (delivey.restaurantSpecificPage != null) {
+                            delivey.restaurantSpecificPage.show(false);
+                        }
                         break;
                     case 2:
                         delivey.listRestaurantLayout.show(false);
                         delivey.orderLayout.show(false);
                         delivey.myRestaurantLayout.show(true);
-                        delivey.restaurantSpecificPage.show(false);
+                        if (delivey.restaurantSpecificPage != null) {
+                            delivey.restaurantSpecificPage.show(false);
+                        }
                         break;
                 }
             });
