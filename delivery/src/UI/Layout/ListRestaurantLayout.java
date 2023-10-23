@@ -22,9 +22,11 @@ public class ListRestaurantLayout extends JLabel {
     public ListRestaurantLayout(Delivery delivery) {
         Endereco endereco1 = new Endereco(4, 2);
         Lanche lanche1 = new Lanche("lache1", 20.1);
+        Lanche lanche2 = new Lanche("lache2", 214.1);
 
         Restaurante restaurante1 = new Restaurante("Restaurante1", endereco1);
-        for (int i=0; i<11; i++) {
+        restaurante1.adicionarLanche(lanche2);
+        for (int i=0; i<1; i++) {
             restaurante1.adicionarLanche(lanche1);
         }
         this.listRestaurants.add(restaurante1);

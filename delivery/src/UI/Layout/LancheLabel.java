@@ -9,8 +9,7 @@ import java.awt.*;
 import java.util.Objects;
 
 public class LancheLabel extends JButton {
-    public LancheLabel(int y, Lanche lanche, Delivery delivery, Restaurante restaurante) {
-//        this.setBounds(0, y, 500, 50);
+    public LancheLabel(Lanche lanche, Delivery delivery, Restaurante restaurante) {
         this.setPreferredSize(new Dimension(500, 50));
         this.setMinimumSize(new Dimension(500, 50));
         this.setMaximumSize(new Dimension(500, 50));

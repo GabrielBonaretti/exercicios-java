@@ -29,16 +29,12 @@ public class RestaurantSpecificPage extends JPanel {
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
         panel.setVisible(true);
 
-        int count = 0;
         for (Lanche lanche: restaurante.listaLanches) {
-            LancheLabel lancheLabel = new LancheLabel(count * 70, lanche, delivery, restaurante);
+            LancheLabel lancheLabel = new LancheLabel(lanche, delivery, restaurante);
             lancheLabel.setVisible(true);
             panel.add(lancheLabel);
 
             panel.add(Box.createRigidArea(new Dimension(0, 20)));
-
-            count++;
-
         }
 
         JScrollPane scrollPane = new JScrollPane(panel);

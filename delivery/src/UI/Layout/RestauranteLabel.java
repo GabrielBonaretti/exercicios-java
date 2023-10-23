@@ -34,9 +34,6 @@ public class RestauranteLabel extends JLabel {
         buttonRestaurant.setBounds(360, 10, 100, 30);
         buttonRestaurant.setFocusable(false);
         buttonRestaurant.addActionListener(e -> {
-            System.out.println(delivery.pedido.restaurante != null);
-
-
             if (delivery.restaurantSpecificPage != null) {
                 delivery.remove(delivery.restaurantSpecificPage);
             }
@@ -46,8 +43,6 @@ public class RestauranteLabel extends JLabel {
             delivery.listRestaurantLayout.show(false);
             delivery.orderLayout.show(false);
             delivery.myRestaurantLayout.show(false);
-
-
         });
 
         labelImage.setIcon(image);

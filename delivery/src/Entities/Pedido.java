@@ -6,15 +6,30 @@ import java.util.Objects;
 public class Pedido {
     public Restaurante restaurante;
     public Usuario usuario;
-    public ArrayList<Lanche> carrinho = new ArrayList<Lanche>();
+    public ArrayList<ArrayList<Object>> carrinho = new ArrayList<ArrayList<Object>>();
 //    public Pedido(Restaurante restaurante, Usuario usuario) {
 //        this.restaurante = restaurante;
 //        this.usuario = usuario;
 //    }
 
     public void fazerPedido(Lanche lanche) {
-        ArrayList<Object> lanchePedido = new ArrayList<Object>();
-        this.carrinho.add(lanche);
+        boolean alreadyExists = false;
+        if (carrinho.toArray().length != 0) {
+            for (ArrayList<Object> lanchePedido: carrinho) {
+                if (lanchePedido.get(0).equals(lanche)) {
+                    int quantidade = (int) lanchePedido.get(1);
+                    lanchePedido.set(1, quantidade + 1);
+                    alreadyExists = true;
+                }
+            }
+        }
+
+        if (!alreadyExists) {
+            ArrayList<Object> lanchePedido = new ArrayList<Object>();
+            lanchePedido.add(lanche);
+            lanchePedido.add(1);
+            this.carrinho.add(lanchePedido);
+        }
     }
 
 
