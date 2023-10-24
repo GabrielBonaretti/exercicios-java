@@ -8,7 +8,7 @@ import java.awt.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class OrderLayout extends JLabel {
+public class OrderLayout extends JPanel {
     public Delivery delivery;
     public OrderLayout(Delivery delivery) {
         this.delivery = delivery;

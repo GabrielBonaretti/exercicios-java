@@ -16,8 +16,8 @@ public class Tela extends JFrame{
         this.setLayout(null);
 
 //        this.add(new Login());
-//        this.add(new Cadastro());
-        this.add(new Delivery());
+        this.add(new Cadastro());
+//        this.add(new Delivery());
 
 
         this.setVisible(true);

@@ -1,0 +1,44 @@
+create database delivery;
+
+use delivery;
+
+create table users (
+    id int auto_increment primary key,
+    name varchar(100) not null,
+    cpf int not null,
+    positionX int not null,
+    positionY int not null,
+    password varchar(255) not null
+);
+
+create table restaurant (
+    id int auto_increment primary key,
+    name varchar(100) not null,
+    cnpj int not null,
+    positionX int not null,
+    positionY int not null,
+    password varchar(255) not null
+);
+
+create table orders (
+    id int auto_increment primary key,
+    idUser int not null,
+    dateOrder datetime not null,
+	constraint fkUsers foreign key (idUser) references users(id)
+);
+
+create table food (
+	id int auto_increment primary key,
+    idRestaurant int not null,
+    name varchar(100) not null,
+    preco double not null,
+	constraint fkRestaurant foreign key (idRestaurant) references restaurant(id)
+);
+
+create table OrderFood (
+    id int auto_increment primary key,
+    idOrder int not null,
+    idFood int not null,
+	constraint fkOrder foreign key (idOrder) references orders(id),
+	constraint fkFood foreign key (idFood) references food(id)
+);
