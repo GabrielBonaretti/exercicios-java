@@ -5,16 +5,16 @@ use delivery;
 create table users (
     id int auto_increment primary key,
     name varchar(100) not null,
-    cpf int not null,
+    cpf varchar(255) not null,
     positionX int not null,
     positionY int not null,
     password varchar(255) not null
 );
 
-create table restaurant (
+create table restaurants (
     id int auto_increment primary key,
     name varchar(100) not null,
-    cnpj int not null,
+    cnpj varchar(25) not null,
     positionX int not null,
     positionY int not null,
     password varchar(255) not null
@@ -27,18 +27,18 @@ create table orders (
 	constraint fkUsers foreign key (idUser) references users(id)
 );
 
-create table food (
+create table foods (
 	id int auto_increment primary key,
     idRestaurant int not null,
     name varchar(100) not null,
     preco double not null,
-	constraint fkRestaurant foreign key (idRestaurant) references restaurant(id)
+	constraint fkRestaurant foreign key (idRestaurant) references restaurants(id)
 );
 
-create table OrderFood (
+create table OrderFoods (
     id int auto_increment primary key,
     idOrder int not null,
     idFood int not null,
 	constraint fkOrder foreign key (idOrder) references orders(id),
-	constraint fkFood foreign key (idFood) references food(id)
+	constraint fkFood foreign key (idFood) references foods(id)
 );
