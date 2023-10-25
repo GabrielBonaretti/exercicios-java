@@ -2,14 +2,17 @@ package src.UI.Layout;
 
 import src.Database.Database;
 import src.UI.Components.*;
+import src.UI.Tela;
 
 import javax.swing.*;
 import javax.xml.crypto.Data;
 import java.awt.*;
 
 public class FormCadastro extends JLabel {
-    boolean isRestaurant = false;
-    public FormCadastro() {
+    private final Tela tela;
+    private boolean isRestaurant = false;
+    public FormCadastro(Tela tela) {
+        this.tela = tela;
         this.setBounds(300, 150, 400, 450);
         this.setBackground(new Color(170,170,170));
         this.setOpaque(true);
@@ -45,7 +48,18 @@ public class FormCadastro extends JLabel {
         Input inputPosicaoY = new Input("Posição (Y)", 210, 215, 115);
         InputSenha inputSenha = new InputSenha("Senha", 75, 285, 250);
 
-        BotaoLoginCadastrar botaoLogin = new BotaoLoginCadastrar("Já tem uma conta? Entre!", 150, 355);
+        JButton botaoLogin = new JButton("Já tem uma conta? Entre!");
+        botaoLogin.setFont(new Font("Arial", Font.BOLD,10));
+        botaoLogin.setBackground(new Color(170,170,170));
+        botaoLogin.setBorder(null);
+        botaoLogin.setFocusable(false);
+        botaoLogin.setBounds(150, 355, 175, 20);
+        botaoLogin.addActionListener(e -> {
+            this.tela.login.show(true);
+            this.tela.cadastro.show(false);
+
+        });
+
 
         JButton cadastrar = new JButton("Cadastrar");
         cadastrar.setFont(new Font("Arial", Font.BOLD,20));

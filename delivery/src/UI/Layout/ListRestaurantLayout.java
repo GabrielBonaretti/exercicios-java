@@ -59,6 +59,7 @@ public class ListRestaurantLayout extends JPanel {
 
         this.setBounds(250, 0, 750, 800);
         this.setBackground(new Color(240,240,240));
+        this.setLayout(null);
         this.setOpaque(true);
 
         JTextField inputSearch = new JTextField();

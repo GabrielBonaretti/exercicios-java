@@ -91,4 +91,36 @@ public class Database {
             System.exit(-42);
         }
     }
+
+    public int verifyAcountUser(String name, String password) {
+        String hexPassword = HashPassword.hexPassword(password);
+
+        String VERIFY = "SELECT * FROM users WHERE name=? AND password=?";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement produto = conn.prepareStatement(VERIFY);
+
+            produto.setString(1, name);
+            produto.setString(2, hexPassword);
+
+            ResultSet resultado = produto.executeQuery();
+
+            if (resultado.isBeforeFirst() && resultado.next()) {
+                int idUser = resultado.getInt(1);
+                produto.close();
+                desconectar(conn);
+                return idUser;
+            } else {
+                produto.close();
+                desconectar(conn);
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("deu erro truta");
+            System.exit(-42);
+        }
+        return 0;
+    }
 }

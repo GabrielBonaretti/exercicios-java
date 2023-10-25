@@ -7,6 +7,9 @@ import src.UI.Pages.Login;
 import javax.swing.*;
 
 public class Tela extends JFrame{
+    public Login login;
+    public Cadastro cadastro;
+    public Delivery delivery;
 
     public Tela() {
 
@@ -15,10 +18,17 @@ public class Tela extends JFrame{
         this.setResizable(false);
         this.setLayout(null);
 
-//        this.add(new Login());
-        this.add(new Cadastro());
-//        this.add(new Delivery());
+        this.login = new Login(this);
+        this.add(login);
+        this.login.show(true);
 
+        this.cadastro = new Cadastro(this);
+        this.add(cadastro);
+        this.cadastro.show(false);
+
+        this.delivery = new Delivery();
+        this.add(delivery);
+        this.delivery.show(false);
 
         this.setVisible(true);
     }
