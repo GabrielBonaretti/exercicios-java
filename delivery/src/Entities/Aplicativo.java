@@ -16,40 +16,39 @@ public class Aplicativo {
         Restaurante restaurante = new Restaurante(usuario.nome, usuario.endereco);
         this.restauranteLogado = restaurante;
         this.restaurantes.add(restaurante);
-        usuario.setRestaurante(restaurante);
         return usuario;
     }
-
-    public void cadastraUsuario() {
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Digite seu nome: ");
-        String nome = sc.nextLine();
-
-        System.out.println("Digite seu endereco X: ");
-        int enderecoX = sc.nextInt();
-
-        System.out.println("Digite seu endereco Y: ");
-        int enderecoY = sc.nextInt();
-
-        Endereco endereco = new Endereco(enderecoX, enderecoY);
-
-        System.out.println("Digite seu cpf: ");
-        String cpf = sc.nextLine();
-
-        System.out.println("Digite sua senha: ");
-        String senha = sc.nextLine();
-
-        System.out.println("É um restaurante(S/N): ");
-        String isRestaurante = sc.nextLine();
-
-        Usuario usuario = new Usuario(nome, endereco, cpf, senha);
-
-        if (Objects.equals(isRestaurante, "S")) {
-            usuario = cadastraRestaurante(usuario);
-        }
-
-        this.usuarios.add(usuario);
-    }
+//
+//    public void cadastraUsuario() {
+//        Scanner sc = new Scanner(System.in);
+//        System.out.println("Digite seu nome: ");
+//        String nome = sc.nextLine();
+//
+//        System.out.println("Digite seu endereco X: ");
+//        int enderecoX = sc.nextInt();
+//
+//        System.out.println("Digite seu endereco Y: ");
+//        int enderecoY = sc.nextInt();
+//
+//        Endereco endereco = new Endereco(enderecoX, enderecoY);
+//
+//        System.out.println("Digite seu cpf: ");
+//        String cpf = sc.nextLine();
+//
+//        System.out.println("Digite sua senha: ");
+//        String senha = sc.nextLine();
+//
+//        System.out.println("É um restaurante(S/N): ");
+//        String isRestaurante = sc.nextLine();
+//
+//        Usuario usuario = new Usuario(nome, endereco, cpf, senha);
+//
+//        if (Objects.equals(isRestaurante, "S")) {
+//            usuario = cadastraRestaurante(usuario);
+//        }
+//
+//        this.usuarios.add(usuario);
+//    }
 
     public void loginUsuario() {
         Scanner sc = new Scanner(System.in);

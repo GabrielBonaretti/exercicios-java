@@ -59,6 +59,8 @@ public class FormLogin extends JLabel {
             this.tela.login.show(false);
             this.tela.cadastro.show(true);
 
+            inputNome.clearContent();
+            inputSenha.clearContent();
         });
 
         JButton avancar = new JButton("Entrar");
@@ -70,12 +72,35 @@ public class FormLogin extends JLabel {
             String password = inputSenha.inputContent();
 
             Database database = new Database();
-            int userID = database.verifyAcountUser(name,password);
+            int userID;
+
+            if (!isRestaurant) {
+                userID = database.verifyAcountUser(name,password);
+                this.tela.delivery.listRestaurantLayout.show(true);
+                this.tela.delivery.orderLayout.show(false);
+                this.tela.delivery.myRestaurantLayout.show(false);
+            } else {
+                userID = database.verifyAcountRestaurant(name,password);
+                this.tela.delivery.listRestaurantLayout.show(false);
+                this.tela.delivery.orderLayout.show(false);
+                this.tela.delivery.myRestaurantLayout.show(true);
+            }
 
             if (userID > 0) {
                 this.tela.login.show(false);
                 this.tela.delivery.show(true);
             }
+
+            this.tela.delivery.id = userID;
+            this.tela.delivery.sidebar.createComponents(isRestaurant);
+
+            if (!isRestaurant) {
+                this.tela.delivery.listRestaurantLayout.createComponents();
+            } else {
+                this.tela.delivery.myRestaurantLayout.createComponents();
+            }
+            inputNome.clearContent();
+            inputSenha.clearContent();
         });
 
         this.add(titulo);

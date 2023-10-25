@@ -26,7 +26,7 @@ public class Tela extends JFrame{
         this.add(cadastro);
         this.cadastro.show(false);
 
-        this.delivery = new Delivery();
+        this.delivery = new Delivery(this);
         this.add(delivery);
         this.delivery.show(false);
 

@@ -34,11 +34,7 @@ public class RestauranteLabel extends JLabel {
         buttonRestaurant.setBounds(360, 10, 100, 30);
         buttonRestaurant.setFocusable(false);
         buttonRestaurant.addActionListener(e -> {
-            if (delivery.restaurantSpecificPage != null) {
-                delivery.remove(delivery.restaurantSpecificPage);
-            }
-            delivery.restaurantSpecificPage = new RestaurantSpecificPage(restaurante, delivery);
-            delivery.add(delivery.restaurantSpecificPage);
+            delivery.restaurantSpecificPage.createComponents(restaurante);
             delivery.restaurantSpecificPage.show(true);
             delivery.listRestaurantLayout.show(false);
             delivery.orderLayout.show(false);

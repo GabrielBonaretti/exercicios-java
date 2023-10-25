@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Restaurante {
+    public int id;
+
     public String nome;
     public Endereco localizacao;
     public ArrayList<Lanche> listaLanches = new ArrayList<Lanche>();
@@ -24,6 +26,7 @@ public class Restaurante {
     public void adicionarLanche(Lanche lanche) {
         listaLanches.add(lanche);
     }
+
     public void removerLanche() {
         Scanner sc = new Scanner(System.in);
         impormirCardapio();
@@ -31,6 +34,14 @@ public class Restaurante {
         System.out.println("Escolha um lanche: ");
         int escolha = sc.nextInt();
         listaLanches.remove(escolha);
-
     }
+
+    public void setListaLanches(ArrayList<Lanche> listaLanches) {
+        this.listaLanches = listaLanches;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
 }

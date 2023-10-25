@@ -4,7 +4,7 @@ use delivery;
 
 create table users (
     id int auto_increment primary key,
-    name varchar(100) not null,
+    name varchar(100) not null unique,
     cpf varchar(255) not null,
     positionX int not null,
     positionY int not null,
@@ -13,7 +13,7 @@ create table users (
 
 create table restaurants (
     id int auto_increment primary key,
-    name varchar(100) not null,
+    name varchar(100) not null unique,
     cnpj varchar(25) not null,
     positionX int not null,
     positionY int not null,

@@ -2,38 +2,58 @@ package src.UI.Layout;
 
 import src.UI.Components.BotaoSideBar;
 import src.UI.Pages.Delivery;
+import src.UI.Tela;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
 public class Sidebar extends JLabel {
-    private boolean isRestaurante = true;
     private ArrayList<BotaoSideBar> listaBotoes = new ArrayList<BotaoSideBar>();
-
-    public Sidebar(Delivery delivey) {
+    public Delivery delivery;
+    public Tela tela;
+    public Sidebar(Delivery delivey, Tela tela) {
         this.setBounds(0, 0, 250, 800);
         this.setBackground(new Color(200,200,200));
         this.setOpaque(true);
+        this.delivery = delivey;
+        this.tela = tela;
+        createComponents(false);
+    }
 
-        BotaoSideBar botaoListarRestaurantes = new BotaoSideBar("Listar restaurantes", 0, "src/Resources/lista.png",0);
-        botaoListarRestaurantes.setBackground(new Color(170, 170, 170));
-        BotaoSideBar carrinho = new BotaoSideBar("Carrinho", 40, "src/Resources/cart.png",1);
+    public void limpandoCor() {
+        for (BotaoSideBar botao: listaBotoes) {
+            botao.setBackground(new Color(200, 200, 200));
+        }
+    }
+
+    public void createComponents(boolean isRestaurante) {
+        this.removeAll();
+        this.repaint();
+        this.revalidate();
+
         BotaoSideBar botaoSair;
         BotaoSideBar botaoMeuRestaurantes;
+        BotaoSideBar botaoListarRestaurantes;
+        BotaoSideBar carrinho;
 
         if (isRestaurante) {
-            botaoMeuRestaurantes = new BotaoSideBar("Meu restaurante", 80, "src/Resources/loja.png",2);
-            botaoSair = new BotaoSideBar("Sair", 120, "src/Resources/logout.png", 4);
+            botaoMeuRestaurantes = new BotaoSideBar("Meu restaurante", 0, "src/Resources/loja.png",2);
+            botaoSair = new BotaoSideBar("Sair", 40, "src/Resources/logout.png", 4);
             listaBotoes.add(botaoMeuRestaurantes);
+            listaBotoes.add(botaoSair);
             this.add(botaoMeuRestaurantes);
         } else {
+            botaoListarRestaurantes = new BotaoSideBar("Listar restaurantes", 0, "src/Resources/lista.png",0);
+            botaoListarRestaurantes.setBackground(new Color(170, 170, 170));
+            carrinho = new BotaoSideBar("Carrinho", 40, "src/Resources/cart.png",1);
             botaoSair = new BotaoSideBar("Sair", 80, "src/Resources/logout.png",4);
+            listaBotoes.add(carrinho);
+            listaBotoes.add(botaoListarRestaurantes);
+            listaBotoes.add(botaoSair);
+            this.add(botaoListarRestaurantes);
+            this.add(carrinho);
         }
-
-        listaBotoes.add(carrinho);
-        listaBotoes.add(botaoListarRestaurantes);
-        listaBotoes.add(botaoSair);
 
         for (BotaoSideBar botao: listaBotoes) {
             botao.addActionListener(e -> {
@@ -42,42 +62,41 @@ public class Sidebar extends JLabel {
 
                 switch (botao.buttonChoice) {
                     case 0:
-                        delivey.listRestaurantLayout.show(true);
-                        delivey.orderLayout.show(false);
-                        delivey.myRestaurantLayout.show(false);
-                        if (delivey.restaurantSpecificPage != null) {
-                            delivey.restaurantSpecificPage.show(false);
+                        this.delivery.listRestaurantLayout.show(true);
+                        this.delivery.orderLayout.show(false);
+                        this.delivery.myRestaurantLayout.show(false);
+                        if (this.delivery.restaurantSpecificPage != null) {
+                            this.delivery.restaurantSpecificPage.show(false);
                         }
                         break;
                     case 1:
-                        delivey.listRestaurantLayout.show(false);
-                        delivey.orderLayout.show(true);
-                        delivey.myRestaurantLayout.show(false);
-                        if (delivey.restaurantSpecificPage != null) {
-                            delivey.restaurantSpecificPage.show(false);
+                        this.delivery.listRestaurantLayout.show(false);
+                        this.delivery.orderLayout.show(true);
+                        this.delivery.myRestaurantLayout.show(false);
+                        if (this.delivery.restaurantSpecificPage != null) {
+                            this.delivery.restaurantSpecificPage.show(false);
                         }
                         break;
                     case 2:
-                        delivey.listRestaurantLayout.show(false);
-                        delivey.orderLayout.show(false);
-                        delivey.myRestaurantLayout.show(true);
-                        if (delivey.restaurantSpecificPage != null) {
-                            delivey.restaurantSpecificPage.show(false);
+                        this.delivery.listRestaurantLayout.show(false);
+                        this.delivery.orderLayout.show(false);
+                        this.delivery.myRestaurantLayout.show(true);
+                        if (this.delivery.restaurantSpecificPage != null) {
+                            this.delivery.restaurantSpecificPage.show(false);
                         }
+                        break;
+                    case 4:
+                        this.tela.delivery.show(false);
+                        this.tela.login.show(true);
+                        this.delivery.pedido.carrinho.clear();
+                        this.delivery.orderLayout.recreateRequests();
                         break;
                 }
             });
         }
 
-        this.add(botaoListarRestaurantes);
-        this.add(carrinho);
-        this.add(botaoSair);
-    }
 
-    public void limpandoCor() {
-        for (BotaoSideBar botao: listaBotoes) {
-            botao.setBackground(new Color(200, 200, 200));
-        }
+        this.add(botaoSair);
     }
 
 }

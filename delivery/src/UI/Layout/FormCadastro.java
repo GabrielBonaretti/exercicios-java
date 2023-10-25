@@ -58,6 +58,11 @@ public class FormCadastro extends JLabel {
             this.tela.login.show(true);
             this.tela.cadastro.show(false);
 
+            inputNome.clearContent();
+            inputCPF.clearContent();
+            inputPosicaoX.clearContent();
+            inputPosicaoY.clearContent();
+            inputSenha.clearContent();
         });
 
 

@@ -1,6 +1,11 @@
 package src.Database;
 
+import src.Entities.Endereco;
+import src.Entities.Lanche;
+import src.Entities.Restaurante;
+
 import java.sql.*;
+import java.util.ArrayList;
 
 public class Database {
 
@@ -87,7 +92,6 @@ public class Database {
             System.out.println("O usuario " + name + " foi inserido com sucesso!");
         } catch (Exception e) {
             e.printStackTrace();
-            System.err.println("Erro salvando o produto");
             System.exit(-42);
         }
     }
@@ -99,28 +103,139 @@ public class Database {
 
         try {
             Connection conn = conectar();
-            PreparedStatement produto = conn.prepareStatement(VERIFY);
+            PreparedStatement user = conn.prepareStatement(VERIFY);
 
-            produto.setString(1, name);
-            produto.setString(2, hexPassword);
+            user.setString(1, name);
+            user.setString(2, hexPassword);
 
-            ResultSet resultado = produto.executeQuery();
+            ResultSet resultado = user.executeQuery();
 
             if (resultado.isBeforeFirst() && resultado.next()) {
                 int idUser = resultado.getInt(1);
-                produto.close();
+                user.close();
                 desconectar(conn);
                 return idUser;
             } else {
-                produto.close();
+                user.close();
                 desconectar(conn);
                 return 0;
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            System.err.println("deu erro truta");
             System.exit(-42);
         }
         return 0;
+    }
+
+    public int verifyAcountRestaurant(String name, String password) {
+        String hexPassword = HashPassword.hexPassword(password);
+
+        String VERIFY = "SELECT * FROM restaurants WHERE name=? AND password=?";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement user = conn.prepareStatement(VERIFY);
+
+            user.setString(1, name);
+            user.setString(2, hexPassword);
+
+            ResultSet resultado = user.executeQuery();
+
+            if (resultado.isBeforeFirst() && resultado.next()) {
+                int idUser = resultado.getInt(1);
+                user.close();
+                desconectar(conn);
+                return idUser;
+            } else {
+                user.close();
+                desconectar(conn);
+                return 0;
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+        return 0;
+    }
+
+    public ArrayList<Restaurante> getAllRestaurants() {
+        String getAllRestaurants = "SELECT * FROM restaurants";
+        ArrayList<Restaurante> listaRestaurants = new ArrayList<>();
+        try {
+            Connection conn = conectar();
+            PreparedStatement restaurant = conn.prepareStatement(getAllRestaurants);
+
+
+            ResultSet resultado = restaurant.executeQuery();
+
+            if (resultado.isBeforeFirst()) {
+                while (resultado.next()) {
+                    Endereco endereco = new Endereco(resultado.getInt(4),resultado.getInt(5));
+                    Restaurante restaurante = new Restaurante(resultado.getString(2), endereco);
+                    restaurante.setId(resultado.getInt(1));
+                    listaRestaurants.add(restaurante);
+                }
+            } else {
+                System.out.println("Não existem restaurantes cadastrados.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return listaRestaurants;
+    }
+
+    public Restaurante getRestaurant(int id) {
+        String getRestaurant = "SELECT * FROM restaurants WHERE id=?";
+        Restaurante restaurante = null;
+        try {
+            Connection conn = conectar();
+            PreparedStatement restaurant = conn.prepareStatement(getRestaurant);
+
+            restaurant.setInt(1, id);
+
+
+            ResultSet resultado = restaurant.executeQuery();
+
+            if (resultado.isBeforeFirst() && resultado.next()) {
+                Endereco endereco = new Endereco(resultado.getInt(4),resultado.getInt(5));
+                restaurante = new Restaurante(resultado.getString(2), endereco);
+            } else {
+                System.out.println("Não existe esse restaurante.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return restaurante;
+    }
+
+    public ArrayList<Lanche> getAllFoods(int id) {
+        String getAllFoods = "SELECT * FROM foods WHERE idRestaurant=?";
+        ArrayList<Lanche> listFoods = new ArrayList<>();
+        try {
+            Connection conn = conectar();
+            PreparedStatement food = conn.prepareStatement(getAllFoods);
+            System.out.println(id);
+            food.setInt(1, id);
+
+            ResultSet resultado = food.executeQuery();
+
+            if (resultado.isBeforeFirst()) {
+                while (resultado.next()) {
+                    Lanche newFood = new Lanche(resultado.getString(3), resultado.getDouble(4));
+                    listFoods.add(newFood);
+                }
+            } else {
+                System.out.println("Não existem foods na loja.");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return listFoods;
     }
 }
