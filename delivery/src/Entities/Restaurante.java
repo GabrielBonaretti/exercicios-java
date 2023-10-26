@@ -30,17 +30,16 @@ public class Restaurante {
         database.addFood(id, lanche.nome, lanche.preco);
     }
 
-    public void removerLanche() {
-        Scanner sc = new Scanner(System.in);
-        impormirCardapio();
-
-        System.out.println("Escolha um lanche: ");
-        int escolha = sc.nextInt();
-        listaLanches.remove(escolha);
+    public void removerLanche(int lancheId) {
+        Database database = new Database();
+        database.deleteFood(lancheId);
     }
 
-    public void setListaLanches(ArrayList<Lanche> listaLanches) {
-        this.listaLanches = listaLanches;
+    public void setListaLanches() {
+        Database database = new Database();
+        ArrayList<Lanche> listFoods = database.getAllFoods(this.id);
+        this.listaLanches.clear();
+        this.listaLanches = listFoods;
     }
 
     public void setId(int id) {

@@ -35,10 +35,10 @@ public class RestauranteLabel extends JLabel {
         buttonRestaurant.setFocusable(false);
         buttonRestaurant.addActionListener(e -> {
             delivery.restaurantSpecificPage.createComponents(restaurante);
-            delivery.restaurantSpecificPage.show(true);
-            delivery.listRestaurantLayout.show(false);
-            delivery.orderLayout.show(false);
-            delivery.myRestaurantLayout.show(false);
+            delivery.restaurantSpecificPage.setVisible(true);
+            delivery.listRestaurantLayout.setVisible(false);
+            delivery.orderLayout.setVisible(false);
+            delivery.myRestaurantLayout.setVisible(false);
         });
 
         labelImage.setIcon(image);

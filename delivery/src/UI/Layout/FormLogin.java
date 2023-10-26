@@ -57,8 +57,8 @@ public class FormLogin extends JLabel {
         botaoCadastrar.setFocusable(false);
         botaoCadastrar.setBounds(150, 290, 175, 20);
         botaoCadastrar.addActionListener(e -> {
-            this.tela.login.show(false);
-            this.tela.cadastro.show(true);
+            this.tela.login.setVisible(false);
+            this.tela.cadastro.setVisible(true);
 
             inputNome.clearContent();
             inputSenha.clearContent();
@@ -77,19 +77,23 @@ public class FormLogin extends JLabel {
 
             if (!isRestaurant) {
                 userID = database.verifyAcountUser(name,password);
-                this.tela.delivery.listRestaurantLayout.show(true);
-                this.tela.delivery.orderLayout.show(false);
-                this.tela.delivery.myRestaurantLayout.show(false);
+                this.tela.delivery.listRestaurantLayout.setVisible(true);
+                this.tela.delivery.orderLayout.setVisible(false);
+                this.tela.delivery.restaurantSpecificPage.setVisible(false);
+                this.tela.delivery.myRestaurantLayout.setVisible(false);
             } else {
                 userID = database.verifyAcountRestaurant(name,password);
-                this.tela.delivery.listRestaurantLayout.show(false);
-                this.tela.delivery.orderLayout.show(false);
-                this.tela.delivery.myRestaurantLayout.show(true);
+                this.tela.delivery.listRestaurantLayout.setVisible(false);
+                this.tela.delivery.restaurantSpecificPage.setVisible(false);
+                this.tela.delivery.orderLayout.setVisible(false);
+                this.tela.delivery.myRestaurantLayout.setVisible(true);
             }
 
             if (userID > 0) {
-                this.tela.login.show(false);
-                this.tela.delivery.show(true);
+                this.tela.login.setVisible(false);
+                this.tela.delivery.setVisible(true);
+            } else {
+                JOptionPane.showMessageDialog(null, "Dont user find");
             }
 
             this.tela.delivery.id = userID;

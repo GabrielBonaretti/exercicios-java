@@ -56,8 +56,8 @@ public class FormCadastro extends JLabel {
         botaoLogin.setFocusable(false);
         botaoLogin.setBounds(150, 355, 175, 20);
         botaoLogin.addActionListener(e -> {
-            this.tela.login.show(true);
-            this.tela.cadastro.show(false);
+            this.tela.login.setVisible(true);
+            this.tela.cadastro.setVisible(false);
 
             inputNome.clearContent();
             inputCPF.clearContent();

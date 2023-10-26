@@ -17,21 +17,7 @@ public class OrderLayout extends JPanel {
         this.setOpaque(true);
         this.setLayout(null);
 
-        JLabel label = new JLabel("Carrinho");
-        label.setBounds(125,90,200,40);
-        label.setFont(new Font("Arial", Font.BOLD,30));
-        this.add(label);
-
-        JLabel linha = new JLabel();
-        linha.setBounds(125, 160, 500, 1);
-        linha.setBackground(new Color(180,180,180));
-        linha.setOpaque(true);
-        this.add(linha);
-
-        JLabel noItems = new JLabel("Não há items no carrinho!", SwingConstants.CENTER);
-        noItems.setBounds(275, 365, 200, 50);
-        noItems.setFont(new Font("Arial", Font.BOLD,15));
-        this.add(noItems);
+        recreateRequests();
     }
 
     public void recreateRequests() {
@@ -50,9 +36,11 @@ public class OrderLayout extends JPanel {
         linha.setOpaque(true);
         this.add(linha);
 
+
+
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setVisible(true);
+
 
         int count = 0;
         for (ArrayList<Object> pedidoLanche: this.delivery.pedido.carrinho) {
@@ -103,21 +91,48 @@ public class OrderLayout extends JPanel {
             count++;
         }
 
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVisible(true);
-        scrollPane.setBorder(null);
-        scrollPane.setBounds(125, 190, 500, 500);
-        this.add(scrollPane);
 
-        if (count == 0) {
-            scrollPane.show(false);
+
+        if (count > 0) {
+            panel.setVisible(true);
+            JScrollPane scrollPane = new JScrollPane(panel);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setVisible(true);
+            scrollPane.setBorder(null);
+            scrollPane.setBounds(125, 190, 500, 400);
+            this.add(scrollPane);
+        } else {
+            panel.setVisible(false);
             JLabel noItems = new JLabel("Não há items no carrinho!", SwingConstants.CENTER);
             noItems.setBounds(275, 365, 200, 50);
             noItems.setFont(new Font("Arial", Font.BOLD,15));
             this.add(noItems);
         }
+
+
+        JLabel linha2 = new JLabel();
+        linha2.setBounds(125, 620, 500, 1);
+        linha2.setBackground(new Color(180,180,180));
+        linha2.setOpaque(true);
+        this.add(linha2);
+
+
+        double totalPriceValue = delivery.pedido.getSumValues();
+        JLabel totalPrice = new JLabel("Total price: "+ totalPriceValue);
+        totalPrice.setBounds(125, 650, 500, 40);
+        totalPrice.setFont(new Font("Arial", Font.BOLD,15));
+        this.add(totalPrice);
+
+        JButton doOrder = new JButton("Fazer pedido");
+        doOrder.setBounds(475, 650, 150, 40);
+        doOrder.setFont(new Font("Arial", Font.BOLD,15));
+        doOrder.setEnabled(delivery.pedido.carrinho.size() > 0);
+        doOrder.addActionListener(e -> {
+
+        });
+
+        this.add(doOrder);
     }
 
 }

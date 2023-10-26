@@ -8,7 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
-public class Sidebar extends JLabel {
+public class Sidebar extends JPanel {
     private ArrayList<BotaoSideBar> listaBotoes = new ArrayList<BotaoSideBar>();
     public Delivery delivery;
     public Tela tela;
@@ -16,6 +16,7 @@ public class Sidebar extends JLabel {
         this.setBounds(0, 0, 250, 800);
         this.setBackground(new Color(200,200,200));
         this.setOpaque(true);
+        this.setLayout(null);
         this.delivery = delivey;
         this.tela = tela;
         createComponents(false);
@@ -62,32 +63,32 @@ public class Sidebar extends JLabel {
 
                 switch (botao.buttonChoice) {
                     case 0:
-                        this.delivery.listRestaurantLayout.show(true);
-                        this.delivery.orderLayout.show(false);
-                        this.delivery.myRestaurantLayout.show(false);
+                        this.delivery.listRestaurantLayout.setVisible(true);
+                        this.delivery.orderLayout.setVisible(false);
+                        this.delivery.myRestaurantLayout.setVisible(false);
                         if (this.delivery.restaurantSpecificPage != null) {
-                            this.delivery.restaurantSpecificPage.show(false);
+                            this.delivery.restaurantSpecificPage.setVisible(false);
                         }
                         break;
                     case 1:
-                        this.delivery.listRestaurantLayout.show(false);
-                        this.delivery.orderLayout.show(true);
-                        this.delivery.myRestaurantLayout.show(false);
+                        this.delivery.listRestaurantLayout.setVisible(false);
+                        this.delivery.orderLayout.setVisible(true);
+                        this.delivery.myRestaurantLayout.setVisible(false);
                         if (this.delivery.restaurantSpecificPage != null) {
-                            this.delivery.restaurantSpecificPage.show(false);
+                            this.delivery.restaurantSpecificPage.setVisible(false);
                         }
                         break;
                     case 2:
-                        this.delivery.listRestaurantLayout.show(false);
-                        this.delivery.orderLayout.show(false);
-                        this.delivery.myRestaurantLayout.show(true);
+                        this.delivery.listRestaurantLayout.setVisible(false);
+                        this.delivery.orderLayout.setVisible(false);
+                        this.delivery.myRestaurantLayout.setVisible(true);
                         if (this.delivery.restaurantSpecificPage != null) {
-                            this.delivery.restaurantSpecificPage.show(false);
+                            this.delivery.restaurantSpecificPage.setVisible(false);
                         }
                         break;
                     case 4:
-                        this.tela.delivery.show(false);
-                        this.tela.login.show(true);
+                        this.tela.delivery.setVisible(false);
+                        this.tela.login.setVisible(true);
                         this.delivery.pedido.carrinho.clear();
                         this.delivery.orderLayout.recreateRequests();
                         break;

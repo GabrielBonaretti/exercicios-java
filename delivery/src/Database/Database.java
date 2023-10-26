@@ -231,6 +231,7 @@ public class Database {
             if (resultado.isBeforeFirst()) {
                 while (resultado.next()) {
                     Lanche newFood = new Lanche(resultado.getString(3), resultado.getDouble(4));
+                    newFood.setId(resultado.getInt(1));
                     listFoods.add(newFood);
                 }
             } else {
@@ -253,15 +254,44 @@ public class Database {
         try {
             Connection conn = conectar();
             PreparedStatement insertFood = conn.prepareStatement(ADDFOOD);
-            System.out.println(idRestaurant);
-            System.out.println(name);
-            System.out.println(preco);
+
             insertFood.setInt(1, idRestaurant);
             insertFood.setString(2, name);
             insertFood.setDouble(3, preco);
 
             insertFood.executeUpdate();
             insertFood.close();
+            desconectar(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+    }
+
+    public void deleteFood(int idFood) {
+        String SEARCH_FOR_ID = "SELECT * FROM foods WHERE id=?";
+        String DELETE_FOOD = "DELETE FROM foods WHERE id=?";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement searchFood = conn.prepareStatement(SEARCH_FOR_ID);
+
+            searchFood.setInt(1, idFood);
+
+
+            ResultSet resultado = searchFood.executeQuery();
+
+            if (resultado.isBeforeFirst()) {
+                PreparedStatement deleteFood = conn.prepareStatement(DELETE_FOOD);
+
+                deleteFood.setInt(1, idFood);
+
+                deleteFood.executeUpdate();
+            } else {
+                System.out.println("Não existe produto com o ID informado.");
+            }
+
+            searchFood.close();
             desconectar(conn);
         } catch (Exception e) {
             e.printStackTrace();

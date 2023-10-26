@@ -28,8 +28,7 @@ public class MyRestaurantLayout extends JPanel {
         Database database = new Database();
         Restaurante restaurante = database.getRestaurant(this.delivery.id);
         restaurante.setId(this.delivery.id);
-        ArrayList<Lanche> listFoods = database.getAllFoods(this.delivery.id);
-        restaurante.setListaLanches(listFoods);
+        restaurante.setListaLanches();
 
         JLabel label = new JLabel(restaurante.nome);
         label.setBounds(125,90,450,40);
@@ -87,25 +86,60 @@ public class MyRestaurantLayout extends JPanel {
         linha2.setOpaque(true);
         this.add(linha2);
 
+        if (restaurante.listaLanches.toArray().length > 0) {
+            JPanel panel = new JPanel();
+            panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
+            panel.setVisible(true);
 
-        JPanel panel = new JPanel();
-        panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-        panel.setVisible(true);
+            for (Lanche lanche: restaurante.listaLanches) {
+                JButton lancheButton = new JButton();
+                lancheButton.setPreferredSize(new Dimension(500, 50));
+                lancheButton.setMinimumSize(new Dimension(500, 50));
+                lancheButton.setMaximumSize(new Dimension(500, 50));
+                lancheButton.setLayout(null);
+                lancheButton.setBackground(new Color(240,240,240));
+                lancheButton.addActionListener(e -> {
+                    restaurante.removerLanche(lanche.id);
+                    createComponents();
+                });
 
-        for (Lanche lanche: restaurante.listaLanches) {
-            LancheLabel lancheLabel = new LancheLabel(lanche, delivery, restaurante);
-            lancheLabel.setVisible(true);
-            panel.add(lancheLabel);
+                JLabel nome = new JLabel(lanche.nome);
+                nome.setFont(new Font("Arial", Font.BOLD,15));
+                nome.setBounds(30, 0, 270, 50);
+                lancheButton.add(nome);
 
-            panel.add(Box.createRigidArea(new Dimension(0, 20)));
+                JLabel preco = new JLabel("R$ "+lanche.preco);
+                preco.setFont(new Font("Arial", Font.BOLD,15));
+                preco.setBounds(340, 0, 100, 50);
+                lancheButton.add(preco);
+
+                JLabel button = new JLabel("-");
+                button.setFont(new Font("Arial", Font.BOLD,20));
+                button.setBounds(430, 0, 50, 50);
+                button.setBackground(new Color(240,240,240));
+                button.setBorder(null);
+                button.setFocusable(false);
+                lancheButton.add(button);
+
+                panel.add(lancheButton);
+                panel.add(Box.createRigidArea(new Dimension(0, 20)));
+
+                panel.add(lancheButton);
+                panel.add(Box.createRigidArea(new Dimension(0, 20)));
+            }
+
+            JScrollPane scrollPane = new JScrollPane(panel);
+            scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
+            scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane.setVisible(true);
+            scrollPane.setBorder(null);
+            scrollPane.setBounds(125, 230, 500, 400);
+            this.add(scrollPane);
+        } else {
+            JLabel noItems = new JLabel("Não há pedidos no restaurante!", SwingConstants.CENTER);
+            noItems.setBounds(225, 365, 300, 50);
+            noItems.setFont(new Font("Arial", Font.BOLD,15));
+            this.add(noItems);
         }
-
-        JScrollPane scrollPane = new JScrollPane(panel);
-        scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_NEVER);
-        scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-        scrollPane.setVisible(true);
-        scrollPane.setBorder(null);
-        scrollPane.setBounds(125, 230, 500, 500);
-        this.add(scrollPane);
     }
 }

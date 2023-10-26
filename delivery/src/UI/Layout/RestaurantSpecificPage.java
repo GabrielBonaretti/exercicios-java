@@ -25,10 +25,7 @@ public class RestaurantSpecificPage extends JPanel {
         this.revalidate();
         this.repaint();
 
-        Database database = new Database();
-        ArrayList<Lanche> listFoods = database.getAllFoods(restaurante.id);
-        restaurante.listaLanches.clear();
-        restaurante.setListaLanches(listFoods);
+        restaurante.setListaLanches();
 
         JLabel label = new JLabel(restaurante.nome);
         label.setBounds(125,90,500,40);
@@ -41,7 +38,7 @@ public class RestaurantSpecificPage extends JPanel {
         linha.setOpaque(true);
         this.add(linha);
 
-        if (listFoods.toArray().length > 0) {
+        if (restaurante.listaLanches.toArray().length > 0) {
             JPanel panel = new JPanel();
             panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
             panel.setVisible(true);

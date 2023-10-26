@@ -30,18 +30,18 @@ public class Delivery extends JPanel {
 
         this.listRestaurantLayout = new ListRestaurantLayout(this);
         this.add(listRestaurantLayout);
-        this.listRestaurantLayout.show(false);
+        this.listRestaurantLayout.setVisible(false);
 
         this.orderLayout = new OrderLayout(this);
         this.add(orderLayout);
-        this.listRestaurantLayout.show(false);
+        this.listRestaurantLayout.setVisible(false);
 
         this.myRestaurantLayout = new MyRestaurantLayout(this);
         this.add(myRestaurantLayout);
-        this.listRestaurantLayout.show(false);
+        this.listRestaurantLayout.setVisible(false);
 
         this.restaurantSpecificPage = new RestaurantSpecificPage(this);
         this.add(restaurantSpecificPage);
-        this.restaurantSpecificPage.show(false);
+        this.restaurantSpecificPage.setVisible(false);
     }
 }

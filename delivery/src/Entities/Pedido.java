@@ -7,16 +7,13 @@ public class Pedido {
     public Restaurante restaurante;
     public Usuario usuario;
     public ArrayList<ArrayList<Object>> carrinho = new ArrayList<ArrayList<Object>>();
-//    public Pedido(Restaurante restaurante, Usuario usuario) {
-//        this.restaurante = restaurante;
-//        this.usuario = usuario;
-//    }
 
     public void fazerPedido(Lanche lanche) {
         boolean alreadyExists = false;
         if (carrinho.toArray().length != 0) {
             for (ArrayList<Object> lanchePedido: carrinho) {
-                if (lanchePedido.get(0).equals(lanche)) {
+                Lanche teste = (Lanche) lanchePedido.get(0);
+                if (Objects.equals(teste.nome, lanche.nome)) {
                     int quantidade = (int) lanchePedido.get(1);
                     lanchePedido.set(1, quantidade + 1);
                     alreadyExists = true;
@@ -32,6 +29,17 @@ public class Pedido {
         }
     }
 
+    public double getSumValues() {
+        double sumTotal = 0;
+        if (carrinho.toArray().length != 0) {
+            for (ArrayList<Object> lanchePedido: carrinho) {
+                Lanche lanche = (Lanche) lanchePedido.get(0);
+                int amount = (int) lanchePedido.get(1);
+                sumTotal += lanche.preco * amount;
+            }
+        }
+        return sumTotal;
+    }
 
 //    public void imprimirPedido() {
 //        System.out.printf("%-6s | %-17s | %-12s | %-13s \n", "ITEM", "PREÇO UNITÁRIO", "QUANTIDADE", "PREÇO TOTAL");
