@@ -39,6 +39,7 @@ public class RestauranteLabel extends JLabel {
             delivery.listRestaurantLayout.setVisible(false);
             delivery.orderLayout.setVisible(false);
             delivery.myRestaurantLayout.setVisible(false);
+            delivery.historicLayout.setVisible(false);
         });
 
         labelImage.setIcon(image);

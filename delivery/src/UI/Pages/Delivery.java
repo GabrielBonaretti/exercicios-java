@@ -16,6 +16,8 @@ public class Delivery extends JPanel {
     public OrderLayout orderLayout;
     public MyRestaurantLayout myRestaurantLayout;
     public RestaurantSpecificPage restaurantSpecificPage;
+    public HistoricLayout historicLayout;
+    public SpecificOrderLayout specificOrderLayout;
     public int id;
 
     public Delivery(Tela tela) {
@@ -43,5 +45,13 @@ public class Delivery extends JPanel {
         this.restaurantSpecificPage = new RestaurantSpecificPage(this);
         this.add(restaurantSpecificPage);
         this.restaurantSpecificPage.setVisible(false);
+
+        this.historicLayout = new HistoricLayout(this);
+        this.add(historicLayout);
+        this.historicLayout.setVisible(false);
+
+        this.specificOrderLayout = new SpecificOrderLayout(this);
+        this.add(specificOrderLayout);
+        this.specificOrderLayout.setVisible(false);
     }
 }

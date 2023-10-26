@@ -1,8 +1,6 @@
 package src.Database;
 
-import src.Entities.Endereco;
-import src.Entities.Lanche;
-import src.Entities.Restaurante;
+import src.Entities.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -218,13 +216,14 @@ public class Database {
     }
 
     public ArrayList<Lanche> getAllFoods(int id) {
-        String getAllFoods = "SELECT * FROM foods WHERE idRestaurant=?";
+        String getAllFoods = "SELECT * FROM foods WHERE idRestaurant=? AND active=?";
         ArrayList<Lanche> listFoods = new ArrayList<>();
         try {
             Connection conn = conectar();
             PreparedStatement food = conn.prepareStatement(getAllFoods);
 
             food.setInt(1, id);
+            food.setBoolean(2, true);
 
             ResultSet resultado = food.executeQuery();
 
@@ -249,7 +248,7 @@ public class Database {
     }
 
     public void addFood(int idRestaurant, String name, Double preco) {
-        String ADDFOOD = "INSERT INTO foods (idRestaurant, name, preco) VALUES (?, ?, ?)";
+        String ADDFOOD = "INSERT INTO foods (idRestaurant, name, preco, active) VALUES (?, ?, ?, ?)";
 
         try {
             Connection conn = conectar();
@@ -258,6 +257,7 @@ public class Database {
             insertFood.setInt(1, idRestaurant);
             insertFood.setString(2, name);
             insertFood.setDouble(3, preco);
+            insertFood.setBoolean(4, true);
 
             insertFood.executeUpdate();
             insertFood.close();
@@ -270,32 +270,179 @@ public class Database {
 
     public void deleteFood(int idFood) {
         String SEARCH_FOR_ID = "SELECT * FROM foods WHERE id=?";
-        String DELETE_FOOD = "DELETE FROM foods WHERE id=?";
+        String DEACTIVATE_FOOD = "UPDATE foods SET active=? WHERE id=?";
 
         try {
             Connection conn = conectar();
-            PreparedStatement searchFood = conn.prepareStatement(SEARCH_FOR_ID);
+            PreparedStatement produto = conn.prepareStatement(SEARCH_FOR_ID);
 
-            searchFood.setInt(1, idFood);
+            produto.setInt(1, idFood);
 
-
-            ResultSet resultado = searchFood.executeQuery();
+            ResultSet resultado = produto.executeQuery();
 
             if (resultado.isBeforeFirst()) {
-                PreparedStatement deleteFood = conn.prepareStatement(DELETE_FOOD);
+                PreparedStatement update = conn.prepareStatement(DEACTIVATE_FOOD);
 
-                deleteFood.setInt(1, idFood);
+                update.setBoolean(1, false);
+                update.setInt(2, idFood);
 
-                deleteFood.executeUpdate();
+                update.executeUpdate();
             } else {
                 System.out.println("Não existe produto com o ID informado.");
             }
 
-            searchFood.close();
+            produto.close();
+            desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.err.println("Erro ao atualizar o produto");
+            System.exit(-42);
+        }
+    }
+
+    public void addOrder(int idUser, String date, double totalPrice) {
+        String ADD_ORDER = "INSERT INTO orders (idUser, dateOrder, priceTotal) VALUES (?, ?, ?)";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement addOrder = conn.prepareStatement(ADD_ORDER);
+
+            addOrder.setInt(1, idUser);
+            addOrder.setString(2, date);
+            addOrder.setDouble(3, totalPrice);
+
+            addOrder.executeUpdate();
+
+            addOrder.close();
             desconectar(conn);
         } catch (Exception e) {
             e.printStackTrace();
             System.exit(-42);
         }
+    }
+
+    public int getLastOrder() {
+        String GET_LAST_ORDER = "SELECT * FROM orders ORDER BY id DESC LIMIT 1;";
+        int idLastOrder = 0;
+        try {
+            Connection conn = conectar();
+            PreparedStatement order = conn.prepareStatement(GET_LAST_ORDER);
+
+            ResultSet resultado = order.executeQuery();
+
+            if (resultado.isBeforeFirst() && resultado.next()) {
+                idLastOrder = resultado.getInt(1);
+            } else {
+                System.out.println("Não existem restaurantes cadastrados.");
+            }
+
+            order.close();
+            desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return idLastOrder;
+    }
+
+    public ArrayList<Order> getAllOrders() {
+        String getAllOrders = "SELECT * FROM orders ORDER BY id DESC";
+        ArrayList<Order> listOrders = new ArrayList<>();
+        try {
+            Connection conn = conectar();
+            PreparedStatement orders = conn.prepareStatement(getAllOrders);
+
+            ResultSet resultado = orders.executeQuery();
+
+            if (resultado.isBeforeFirst()) {
+                while (resultado.next()) {
+                    Order order = new Order(resultado.getInt(1), resultado.getString(3), resultado.getDouble(4));
+                    listOrders.add(order);
+                }
+            } else {
+                System.out.println("Não existem foods na loja.");
+            }
+
+            orders.close();
+            desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return listOrders;
+    }
+
+    public void setOrderFood(int idOrder, int idFood, int quantity) {
+        String ADD_ORDER_FOOD = "INSERT INTO orderFoods (idOrder, idFood, quantity) VALUES (?, ?, ?)";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement addOrder = conn.prepareStatement(ADD_ORDER_FOOD);
+
+            addOrder.setInt(1, idOrder);
+            addOrder.setInt(2, idFood);
+            addOrder.setInt(3, quantity);
+
+            addOrder.executeUpdate();
+
+            addOrder.close();
+            desconectar(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+    }
+
+    public ArrayList<ArrayList<Object>> getSpecificOrder(int idOrder) {
+        String SPECIFIC_ORDER = "SELECT * FROM orderFoods WHERE idOrder=?";
+
+        ArrayList<ArrayList<Object>> listItemsOrder = new ArrayList<>();
+        try {
+            Connection conn = conectar();
+            PreparedStatement foodOrder = conn.prepareStatement(SPECIFIC_ORDER);
+
+            foodOrder.setInt(1, idOrder);
+
+            ResultSet resultado = foodOrder.executeQuery();
+
+            if (resultado.isBeforeFirst()) {
+                while (resultado.next()) {
+                    ArrayList<Object> itemOrder = new ArrayList<>();
+
+                    int idFood = resultado.getInt(3);
+
+                    String GET_FOOD = "SELECT * FROM foods WHERE id=?";
+
+                    PreparedStatement food = conn.prepareStatement(GET_FOOD);
+
+                    food.setInt(1, idFood);
+
+                    ResultSet resultadoFood = food.executeQuery();
+
+                    if (resultadoFood.next()) {
+                        Lanche lanche = new Lanche(resultadoFood.getString(3), resultadoFood.getDouble(4));
+
+                        itemOrder.add(lanche);
+                        itemOrder.add(resultado.getInt(4));
+
+                        listItemsOrder.add(itemOrder);
+
+                    }
+                    resultadoFood.close();
+                }
+            } else {
+                System.out.println("Não existem foods na loja.");
+            }
+
+            foodOrder.close();
+            desconectar(conn);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
+
+        return listItemsOrder;
     }
 }

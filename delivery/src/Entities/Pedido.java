@@ -1,5 +1,8 @@
 package src.Entities;
 
+import src.Database.Database;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -40,6 +43,23 @@ public class Pedido {
         }
         return sumTotal;
     }
+
+    public void saveOrder(int idUser, String date, double totalPrice) {
+        Database database = new Database();
+        database.addOrder(idUser, date, totalPrice);
+        int idLastOrder = database.getLastOrder();
+
+        for (ArrayList<Object> lanchePedido: carrinho) {
+            Lanche lanche = (Lanche) lanchePedido.get(0);
+            int amount = (int) lanchePedido.get(1);
+            database.setOrderFood(idLastOrder, lanche.id, amount);
+        }
+
+        carrinho.clear();
+        JOptionPane.showMessageDialog(null, "Pedido realizado com sucesso");
+
+    }
+
 
 //    public void imprimirPedido() {
 //        System.out.printf("%-6s | %-17s | %-12s | %-13s \n", "ITEM", "PREÇO UNITÁRIO", "QUANTIDADE", "PREÇO TOTAL");

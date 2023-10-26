@@ -92,16 +92,14 @@ public class MyRestaurantLayout extends JPanel {
             panel.setVisible(true);
 
             for (Lanche lanche: restaurante.listaLanches) {
-                JButton lancheButton = new JButton();
+                JLabel lancheButton = new JLabel();
                 lancheButton.setPreferredSize(new Dimension(500, 50));
                 lancheButton.setMinimumSize(new Dimension(500, 50));
                 lancheButton.setMaximumSize(new Dimension(500, 50));
                 lancheButton.setLayout(null);
-                lancheButton.setBackground(new Color(240,240,240));
-                lancheButton.addActionListener(e -> {
-                    restaurante.removerLanche(lanche.id);
-                    createComponents();
-                });
+                lancheButton.setOpaque(true);
+                lancheButton.setBackground(new Color(180,180,180));
+
 
                 JLabel nome = new JLabel(lanche.nome);
                 nome.setFont(new Font("Arial", Font.BOLD,15));
@@ -113,16 +111,18 @@ public class MyRestaurantLayout extends JPanel {
                 preco.setBounds(340, 0, 100, 50);
                 lancheButton.add(preco);
 
-                JLabel button = new JLabel("-");
+                JButton button = new JButton("-");
                 button.setFont(new Font("Arial", Font.BOLD,20));
                 button.setBounds(430, 0, 50, 50);
-                button.setBackground(new Color(240,240,240));
+                button.setBackground(new Color(180,180,180));
                 button.setBorder(null);
                 button.setFocusable(false);
-                lancheButton.add(button);
+                button.addActionListener(e -> {
+                    restaurante.removerLanche(lanche.id);
+                    createComponents();
+                });
 
-                panel.add(lancheButton);
-                panel.add(Box.createRigidArea(new Dimension(0, 20)));
+                lancheButton.add(button);
 
                 panel.add(lancheButton);
                 panel.add(Box.createRigidArea(new Dimension(0, 20)));

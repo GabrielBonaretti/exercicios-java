@@ -5,8 +5,10 @@ import src.UI.Pages.Delivery;
 
 import javax.swing.*;
 import java.awt.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Objects;
+import java.util.Date;
 
 public class OrderLayout extends JPanel {
     public Delivery delivery;
@@ -47,21 +49,15 @@ public class OrderLayout extends JPanel {
             Lanche lanche = (Lanche) pedidoLanche.get(0);
             int qntLanche = (int) pedidoLanche.get(1);
 
-            JButton lancheButton = new JButton();
+            JLabel lancheButton = new JLabel();
             lancheButton.setPreferredSize(new Dimension(500, 50));
             lancheButton.setMinimumSize(new Dimension(500, 50));
             lancheButton.setMaximumSize(new Dimension(500, 50));
             lancheButton.setLayout(null);
             lancheButton.setBackground(new Color(240,240,240));
-            lancheButton.addActionListener(e -> {
-                int qnt = (int) pedidoLanche.get(1);
-                if (qnt > 1) {
-                    pedidoLanche.set(1,  qnt - 1);
-                } else {
-                    delivery.pedido.carrinho.remove(pedidoLanche);
-                }
-                recreateRequests();
-            });
+            lancheButton.setBorder(BorderFactory.createLineBorder(Color.BLACK, 1));
+
+
 
             JLabel nome = new JLabel(lanche.nome);
             nome.setFont(new Font("Arial", Font.BOLD,15));
@@ -78,12 +74,21 @@ public class OrderLayout extends JPanel {
             preco.setBounds(340, 0, 100, 50);
             lancheButton.add(preco);
 
-            JLabel button = new JLabel("-");
+            JButton button = new JButton("-");
             button.setFont(new Font("Arial", Font.BOLD,20));
-            button.setBounds(430, 0, 50, 50);
+            button.setBounds(430, 1, 50, 48);
             button.setBackground(new Color(240,240,240));
             button.setBorder(null);
             button.setFocusable(false);
+            button.addActionListener(e -> {
+                int qnt = (int) pedidoLanche.get(1);
+                if (qnt > 1) {
+                    pedidoLanche.set(1,  qnt - 1);
+                } else {
+                    delivery.pedido.carrinho.remove(pedidoLanche);
+                }
+                recreateRequests();
+            });
             lancheButton.add(button);
 
             panel.add(lancheButton);
@@ -127,9 +132,17 @@ public class OrderLayout extends JPanel {
         JButton doOrder = new JButton("Fazer pedido");
         doOrder.setBounds(475, 650, 150, 40);
         doOrder.setFont(new Font("Arial", Font.BOLD,15));
-        doOrder.setEnabled(delivery.pedido.carrinho.size() > 0);
+        doOrder.setEnabled(!delivery.pedido.carrinho.isEmpty());
         doOrder.addActionListener(e -> {
+            Date data = new Date();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 
+            DateFormat hora = DateFormat.getTimeInstance();
+            String dataFormated = sdf.format(data) + " " + hora.format(data);
+
+            delivery.pedido.saveOrder(delivery.id, dataFormated, totalPriceValue);
+
+            recreateRequests();
         });
 
         this.add(doOrder);

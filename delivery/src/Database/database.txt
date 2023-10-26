@@ -24,6 +24,7 @@ create table orders (
     id int auto_increment primary key,
     idUser int not null,
     dateOrder datetime not null,
+    priceTotal DOUBLE NOT NULL,
 	constraint fkUsers foreign key (idUser) references users(id)
 );
 
