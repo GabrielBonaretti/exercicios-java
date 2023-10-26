@@ -37,6 +37,7 @@ public class FormLogin extends JLabel {
         Titulo titulo = new Titulo(textTitle, 100, 90, 200);
 
         JCheckBox restaurantCheckBox = new JCheckBox("Restaurante");
+        restaurantCheckBox.setSelected(isRestaurant);
         restaurantCheckBox.setBounds(225, 25, 100, 40);
         restaurantCheckBox.setBackground(new Color(170,170,170));
         restaurantCheckBox.setOpaque(true);

@@ -28,6 +28,7 @@ public class FormCadastro extends JLabel {
         Titulo titulo = new Titulo("Cadastrar", 75, 25, 100);
 
         JCheckBox restaurantCheckBox = new JCheckBox("Restaurante");
+        restaurantCheckBox.setSelected(isRestaurant);
         restaurantCheckBox.setBounds(225, 25, 100, 40);
         restaurantCheckBox.setBackground(new Color(170,170,170));
         restaurantCheckBox.setOpaque(true);

@@ -1,5 +1,7 @@
 package src.Entities;
 
+import src.Database.Database;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -24,7 +26,8 @@ public class Restaurante {
     }
 
     public void adicionarLanche(Lanche lanche) {
-        listaLanches.add(lanche);
+        Database database = new Database();
+        database.addFood(id, lanche.nome, lanche.preco);
     }
 
     public void removerLanche() {

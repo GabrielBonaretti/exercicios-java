@@ -165,7 +165,6 @@ public class Database {
             Connection conn = conectar();
             PreparedStatement restaurant = conn.prepareStatement(getAllRestaurants);
 
-
             ResultSet resultado = restaurant.executeQuery();
 
             if (resultado.isBeforeFirst()) {
@@ -178,6 +177,9 @@ public class Database {
             } else {
                 System.out.println("Não existem restaurantes cadastrados.");
             }
+
+            restaurant.close();
+            desconectar(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(-42);
@@ -204,6 +206,9 @@ public class Database {
             } else {
                 System.out.println("Não existe esse restaurante.");
             }
+
+            restaurant.close();
+            desconectar(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(-42);
@@ -218,7 +223,7 @@ public class Database {
         try {
             Connection conn = conectar();
             PreparedStatement food = conn.prepareStatement(getAllFoods);
-            System.out.println(id);
+
             food.setInt(1, id);
 
             ResultSet resultado = food.executeQuery();
@@ -231,11 +236,36 @@ public class Database {
             } else {
                 System.out.println("Não existem foods na loja.");
             }
+
+            food.close();
+            desconectar(conn);
         } catch (SQLException e) {
             e.printStackTrace();
             System.exit(-42);
         }
 
         return listFoods;
+    }
+
+    public void addFood(int idRestaurant, String name, Double preco) {
+        String ADDFOOD = "INSERT INTO foods (idRestaurant, name, preco) VALUES (?, ?, ?)";
+
+        try {
+            Connection conn = conectar();
+            PreparedStatement insertFood = conn.prepareStatement(ADDFOOD);
+            System.out.println(idRestaurant);
+            System.out.println(name);
+            System.out.println(preco);
+            insertFood.setInt(1, idRestaurant);
+            insertFood.setString(2, name);
+            insertFood.setDouble(3, preco);
+
+            insertFood.executeUpdate();
+            insertFood.close();
+            desconectar(conn);
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.exit(-42);
+        }
     }
 }
